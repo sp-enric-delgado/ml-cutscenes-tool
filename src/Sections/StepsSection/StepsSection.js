@@ -6,7 +6,7 @@ import "./styles/StepsSection.css"
 const CANVAS_WIDTH = 960;
 const CANVAS_HEIGHT = 540;
 
-export default function StepsSection({OnPreviousClicked}) {
+export default function StepsSection({onPreviousClicked}) {
 
     const [canvas, setCanvas] = useState(null);
     const canvasRef = useRef();
@@ -21,7 +21,7 @@ export default function StepsSection({OnPreviousClicked}) {
     return (
         <div className="section">
             <div>
-                <button onClick={OnPreviousClicked}>Previous</button>
+                <button onClick={onPreviousClicked}>Previous</button>
             </div>
 
             <div className="body">
