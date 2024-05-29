@@ -1,4 +1,4 @@
-export default function SceneSection(OnNextClicked) {
+export default function SceneSection({OnNextClicked}) {
     return (
         <div>
             <h1>Scene</h1>
