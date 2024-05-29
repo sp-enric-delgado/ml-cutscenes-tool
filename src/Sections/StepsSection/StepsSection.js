@@ -1,8 +1,8 @@
-export default function StepsSection({OnPreviousClicked}) {
+export default function StepsSection({onPreviousClicked}) {
     return (
         <div>
             <h1>Steps</h1>
-            <button onClick={OnPreviousClicked}>Previous</button>
+            <button onClick={onPreviousClicked}>Previous</button>
         </div>
     );
 }

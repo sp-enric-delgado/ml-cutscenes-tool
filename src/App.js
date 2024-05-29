@@ -20,10 +20,10 @@ export default function App() {
     return (
         <div>
             <div className={currentPage !== PAGE_SCENE ? "hidden" : ""}>
-                <SceneSection OnNextClicked={goToSteps}/>
+                <SceneSection onNextClicked={goToSteps} />
             </div>
             <div className={currentPage !== PAGE_STEPS ? "hidden" : ""}>
-                <StepsSection OnPreviousClicked={goToScene} />
+                <StepsSection onPreviousClicked={goToScene} />
             </div>
         </div>
     );
