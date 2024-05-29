@@ -3,6 +3,7 @@ import { fabric } from 'fabric';
 
 import "./styles/StepsSection.css"
 import StepComponent from "./components/StepComponent";
+import {Step} from "../../Entities/Step";
 
 const CANVAS_WIDTH = 960;
 const CANVAS_HEIGHT = 540;
@@ -22,11 +23,23 @@ export default function StepsSection({OnPreviousClicked}) {
     //#endregion
 
     //#region STEPS
-    const[steps, setSteps] = useState();
+    const[steps, setSteps] = useState([]);
     //#endregion
 
     function addStep(){
+        setSteps([...steps, new Step()]);
+    }
 
+    function onStepChanged(idx, prop, value) {
+        const newSteps = [...steps];
+
+        if (prop === 'action') {
+            newSteps[idx].setAction(value);
+        } else {
+            newSteps[idx][prop] = value;
+        }
+
+        setSteps(newSteps);
     }
 
     return (
@@ -49,7 +62,9 @@ export default function StepsSection({OnPreviousClicked}) {
                         <button onClick={addStep}>+</button>
                     </div>
                     <div className="stepsSection--steps">
-                        <StepComponent/>
+                        {steps.map((step, idx) =>
+                            <StepComponent key={idx} step={step} onStepChanged={(prop, value) => onStepChanged(idx, prop, value)}/>
+                        )}
                     </div>
                 </div>
             </div>

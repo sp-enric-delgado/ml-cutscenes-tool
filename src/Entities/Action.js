@@ -1,12 +1,15 @@
 export class Action {
-    static FADE;
-    static LOOK;
-    static MOVE;
-    static DIALOG;
-    static SKILL_EFFECT;
-    static WALK;
-    static CHANGE_BACKGROUND;
-    static ANIMATION;
+    static NONE = "";
+    static FADE = "Fade";
+    static LOOK = "Look";
+    static MOVE = "Move";
+    static DIALOG = "Dialog";
+    static SKILL_EFFECT = "Skill Effect";
+    static WALK = "Walk";
+    static CHANGE_BACKGROUND = "Change Background";
+    static ANIMATION = "Animation";
+
+    static ALL_ACTIONS = [this.NONE, this.FADE, this.LOOK, this.MOVE, this.DIALOG, this.SKILL_EFFECT, this.WALK, this.CHANGE_BACKGROUND, this.ANIMATION];
 }
 
 export class Action_Movement{
