@@ -39,6 +39,38 @@
   }
 }
 
+/*
+body {
+    padding: 20px;
+}*/
+
 .hidden {
     display: none;
+}
+/*
+input, select {
+    margin-bottom: 10px;
+}
+
+label {
+    padding-right: 10px;
+}*/
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.float {
+    float: left;
+}
+
+.box {
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+
+label {
+    padding-right: 5px;
 }

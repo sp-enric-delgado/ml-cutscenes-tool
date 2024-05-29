@@ -9,9 +9,20 @@ export default function SceneSection({onNextClicked}) {
         setActors([...actors, new Actor()]);
     }
 
-    function onActorTypeChanged(e, idx) {
+    function onActorChanged(idx, prop, value) {
         const newActors = [...actors];
-        newActors[idx].type = parseInt(e.target.value);
+        if (prop === 'type') {
+            value = parseInt(value);
+        }
+
+        newActors[idx][prop] = value;
+        setActors(newActors);
+    }
+
+    function onRemoveActor(idx) {
+        const newActors = [...actors];
+        newActors.splice(idx, 1);
+        console.log(newActors);
         setActors(newActors);
     }
 
@@ -32,9 +43,17 @@ export default function SceneSection({onNextClicked}) {
             </div>
             <div>
                 <h2>Actors / Characters</h2>
-                {actors.map((actor, idx) =>
-                    <ActorComponent key={idx} actor={actor} onActorTypeChanged={(e) => onActorTypeChanged(e, idx)}/>
-                )}
+                <div className="clearfix">
+                    {actors.map((actor, idx) =>
+                        <div key={idx} className="box float">
+                            <ActorComponent
+                                actor={actor}
+                                onActorChanged={(prop, value) => onActorChanged(idx, prop, value)}
+                            />
+                            <button onClick={(e) => onRemoveActor(idx)}>Remove</button>
+                        </div>
+                    )}
+                </div>
                 <button onClick={onAddActor}>Add Actor</button>
             </div>
 
