@@ -63,7 +63,7 @@ export default function StepsSection({scene, onPreviousClicked}) {
 
             <h3>Actors</h3>
             <ul>
-                {scene.actors.map((actor, idx) => <li>{actor.name}</li>)}
+                {scene.actors.map((actor, idx) => <li key={idx}>{actor.id}</li>)}
             </ul>
 
             <div className="body">
