@@ -14,7 +14,10 @@ export default function StepComponent({step, onModifyStep, onModifyStepParam}) {
                 </li>
                 <li>
                     <label htmlFor="characterInput">Character: </label>
-                    <input id="characterInput" type="text" defaultValue={step.character}/>
+                    <select id="characterInput" value={step.character} onChange={(e) => onModifyStep('character', e.target.value)}>
+                        <option></option>
+                        {actors.map((actor, idx) => <option key={idx} value={actor.id}>{actor.id}</option>)}
+                    </select>
                 </li>
                 <li>
                     <label htmlFor="actionInput">Action: </label>

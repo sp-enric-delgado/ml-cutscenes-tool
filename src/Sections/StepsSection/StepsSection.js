@@ -46,11 +46,6 @@ export default function StepsSection({
                 <button onClick={onPreviousClicked}>Previous</button>
             </div>
 
-            <h3>Actors</h3>
-            <ul>
-                {scene.actors.map((actor, idx) => <li key={idx}>{actor.id}</li>)}
-            </ul>
-
             <div className="body">
                 <div className="canvasSection">
                     <h1 className="title">Canvas</h1>

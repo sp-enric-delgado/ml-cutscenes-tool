@@ -6,7 +6,7 @@ export class Step {
     constructor() {
         this.step = 0;
         this.delay = 0;
-        this.character = "Mokujin";
+        this.character = "";
         this.setAction(Action.NONE);
     };
 
