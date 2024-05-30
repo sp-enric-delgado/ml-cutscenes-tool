@@ -3,14 +3,18 @@ import { fabric } from 'fabric';
 
 import "./styles/StepsSection.css"
 import StepComponent from "./components/StepComponent";
-import {Step} from "../../Entities/Step";
-import Actor from "../../Entities/Actor";
 
 const CANVAS_WIDTH = 960;
 const CANVAS_HEIGHT = 540;
 
-export default function StepsSection({scene, onPreviousClicked}) {
-
+export default function StepsSection({
+                                         scene,
+                                         steps,
+                                         onAddStep,
+                                         onModifyStep,
+                                         onRemoveStep,
+                                         onPreviousClicked
+}) {
     //#region CANVAS
     const [canvas, setCanvas] = useState(null);
     const canvasRef = useRef();
@@ -24,8 +28,6 @@ export default function StepsSection({scene, onPreviousClicked}) {
     //#endregion
 
     //#region STEPS
-    const[steps, setSteps] = useState([]);
-
     useEffect(() => {
         scene.actors.forEach(actor => {
             fabric.Image.fromURL(actor.getAsset(), (img) => {
@@ -34,24 +36,6 @@ export default function StepsSection({scene, onPreviousClicked}) {
         })
 
     }, [scene]);
-    //#endregion
-
-    //#region FUNCTIONS
-    function addStep(){
-        setSteps([...steps, new Step()]);
-    }
-
-    function onStepChanged(idx, prop, value) {
-        const newSteps = [...steps];
-
-        if (prop === 'action') {
-            newSteps[idx].setAction(value);
-        } else {
-            newSteps[idx][prop] = value;
-        }
-
-        setSteps(newSteps);
-    }
     //#endregion
 
     //#region RETURN
@@ -77,11 +61,16 @@ export default function StepsSection({scene, onPreviousClicked}) {
                 <div className="stepsSection">
                     <div className="stepsSeciton--header">
                         <h1 className="title">Steps</h1>
-                        <button onClick={addStep}>+</button>
+                        <button onClick={onAddStep}>+</button>
                     </div>
                     <div className="stepsSection--steps">
                         {steps.map((step, idx) =>
-                            <StepComponent key={idx} step={step} onStepChanged={(prop, value) => onStepChanged(idx, prop, value)}/>
+                            <StepComponent
+                                key={idx}
+                                step={step}
+                                actors={scene.actors}
+                                onModifyStep={(prop, value) => onModifyStep(idx, prop, value)}
+                            />
                         )}
                     </div>
                 </div>

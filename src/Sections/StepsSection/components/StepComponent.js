@@ -1,19 +1,16 @@
 import {Action} from "../../../Entities/Action";
 
-export default function StepComponent({step, onStepChanged}) {
-
-    // const [currentAction, setCurrentAction] = useState();
-
+export default function StepComponent({step, onModifyStep}) {
     return(
         <div>
             <ul>
                 <li>
                     <label htmlFor="stepInput">Step: </label>
-                    <input id="stepInput" type="number" defaultValue={step.step}/>
+                    <input id="stepInput" type="number" value={step.step} onChange={(e) => onModifyStep('step', e.target.value)} />
                 </li>
                 <li>
                     <label htmlFor="delayInput">Delay: </label>
-                    <input id="delayInput" type="number" defaultValue={step.delay}/>
+                    <input id="delayInput" type="number" value={step.delay} onChange={(e) => onModifyStep('delay', e.target.value)} />
                 </li>
                 <li>
                     <label htmlFor="characterInput">Character: </label>
@@ -21,7 +18,7 @@ export default function StepComponent({step, onStepChanged}) {
                 </li>
                 <li>
                     <label htmlFor="actionInput">Action: </label>
-                    <select id="actionInput" value={step.action} onChange={(e) => onStepChanged('action', e.target.value)}>
+                    <select id="actionInput" value={step.action} onChange={(e) => onModifyStep('action', e.target.value)}>
                         {Action.ALL_ACTIONS.map((action, index) => (
                             <option key={index} value={action}>{action}</option>
                         ))}

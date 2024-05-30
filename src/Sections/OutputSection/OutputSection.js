@@ -1,4 +1,4 @@
-export default function OutputSection({scene}) {
+export default function OutputSection({scene, steps}) {
     return (
         <div>
             <hr />
