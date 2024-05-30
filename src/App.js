@@ -42,12 +42,10 @@ export default function App() {
 
     }
 
-    function goToSteps() {
-        setCurrentPage(PAGE_STEPS);
     }
 
-    function goToScene() {
-        setCurrentPage(PAGE_SCENE);
+    function navigateTo(page) {
+        setCurrentPage(page);
     }
 
     return (
@@ -59,13 +57,13 @@ export default function App() {
                     onAddActor={addActor}
                     onModifyActor={modifyActor}
                     onRemoveActor={removeActor}
-                    onNextClicked={goToSteps}
+                    onNextClicked={() => navigateTo(PAGE_STEPS)}
                 />
             </div>
             <div className={currentPage !== PAGE_STEPS ? "hidden" : ""}>
                 <StepsSection
                     scene={scene}
-                    onPreviousClicked={goToScene}
+                    onPreviousClicked={() => navigateTo(PAGE_SCENE)}
                 />
             </div>
             <OutputSection scene={scene} />
