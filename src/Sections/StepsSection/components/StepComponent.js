@@ -1,6 +1,6 @@
 import {Action} from "../../../Entities/Action";
 
-export default function StepComponent({step, onModifyStep, onModifyStepParam}) {
+export default function StepComponent({step, actors, onModifyStep, onModifyStepParam}) {
     return(
         <div>
             <ul>

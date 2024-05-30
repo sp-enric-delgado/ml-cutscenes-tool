@@ -62,22 +62,6 @@ export default function StepsSection({
 
         } catch (error) { console.log("[CANVAS COMPONENT] COULDN'T ADD IMAGE TO CANVAS: " + error); }
     }
-
-    function addStep(){
-        setSteps([...steps, new Step()]);
-    }
-
-    function onStepChanged(idx, prop, value) {
-        const newSteps = [...steps];
-
-        if (prop === 'action') {
-            newSteps[idx].setAction(value);
-        } else {
-            newSteps[idx][prop] = value;
-        }
-
-        setSteps(newSteps);
-    }
     //#endregion
 
     //#region RETURN
