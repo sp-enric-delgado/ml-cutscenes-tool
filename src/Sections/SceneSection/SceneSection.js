@@ -1,57 +1,43 @@
 import ActorComponent from "./components/ActorComponent";
-import {useState} from "react";
-import Actor from "../../Entities/Actor";
 
-export default function SceneSection({onNextClicked}) {
-    const [actors, setActors] = useState([]);
-
-    function onAddActor() {
-        setActors([...actors, new Actor()]);
-    }
-
-    function onChangeActor(idx, prop, value) {
-        const newActors = [...actors];
-        if (prop === 'type') {
-            value = parseInt(value);
-        }
-
-        newActors[idx][prop] = value;
-        setActors(newActors);
-    }
-
-    function onRemoveActor(idx) {
-        const newActors = [...actors];
-        newActors.splice(idx, 1);
-        console.log(newActors);
-        setActors(newActors);
-    }
-
+export default function SceneSection({
+                                         scene,
+                                         onModifyScene,
+                                         onAddActor,
+                                         onRemoveActor,
+                                         onModifyActor,
+                                         onNextClicked
+}) {
     return (
         <div>
             <h1>Scene</h1>
             <div>
+                <label>Id</label>
+                <input type="text" value={scene.id}  onChange={(e) => onModifyScene('id', e.target.value)}/>
+            </div>
+            <div>
                 <label>Internal name</label>
-                <input type="text" />
+                <input type="text" value={scene.internalName} onChange={(e) => onModifyScene('internalName', e.target.value)}/>
             </div>
             <div>
                 <label>Skip</label>
-                <input type="checkbox" />
+                <input type="checkbox" value={scene.skip} onChange={(e) => onModifyScene('skip', e.target.value)}/>
             </div>
             <div>
                 <label>Repeat</label>
-                <input type="checkbox" />
+                <input type="checkbox" value={scene.repeat} onChange={(e) => onModifyScene('repeat', e.target.value)}/>
             </div>
             <div>
                 <h2>Actors / Characters</h2>
                 <div className="clearfix">
-                    {actors.map((actor, idx) =>
+                    {scene.actors.map((actor, idx) =>
                         <div key={idx} className="float box">
                             <h2>Actor {idx + 1}</h2>
                             <ActorComponent
                                 actor={actor}
-                                onActorChanged={(prop, value) => onChangeActor(idx, prop, value)}
+                                onActorChanged={(prop, value) => onModifyActor(idx, prop, value)}
                             />
-                            <button onClick={(e) => onRemoveActor(idx)}>Remove</button>
+                            <button onClick={() => onRemoveActor(idx)}>Remove</button>
                         </div>
                     )}
                 </div>
