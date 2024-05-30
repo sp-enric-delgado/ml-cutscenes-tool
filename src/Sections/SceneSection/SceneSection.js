@@ -9,7 +9,7 @@ export default function SceneSection({onNextClicked}) {
         setActors([...actors, new Actor()]);
     }
 
-    function onActorChanged(idx, prop, value) {
+    function onChangeActor(idx, prop, value) {
         const newActors = [...actors];
         if (prop === 'type') {
             value = parseInt(value);
@@ -46,9 +46,11 @@ export default function SceneSection({onNextClicked}) {
                 <div className="clearfix">
                     {actors.map((actor, idx) =>
                         <div key={idx} className="box float">
+                        <div key={idx} className="box">
+                            <h2>Actor {idx + 1}</h2>
                             <ActorComponent
                                 actor={actor}
-                                onActorChanged={(prop, value) => onActorChanged(idx, prop, value)}
+                                onActorChanged={(prop, value) => onChangeActor(idx, prop, value)}
                             />
                             <button onClick={(e) => onRemoveActor(idx)}>Remove</button>
                         </div>

@@ -8,7 +8,6 @@ export class Step {
         this.delay = 0;
         this.character = "Mokujin";
         this.setAction(Action.NONE);
-        console.log(this.params);
     };
 
     setAction(action) {

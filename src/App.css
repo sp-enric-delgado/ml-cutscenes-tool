@@ -74,3 +74,8 @@ label {
 label {
     padding-right: 5px;
 }
+
+.flipped {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}

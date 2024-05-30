@@ -21,9 +21,12 @@ export default function ActorComponent({actor, onActorChanged}) {
                     </div>
                     <div>
                         <label>Monster</label>
-                        <input type="text" value={actor.monster} onChange={(e) => onActorChanged('monster', e.target.value)}/>
-                        <img src={`http://mci-static-s1.socialpointgames.com/static/monstercity/mobile/ui/monsters/ui_${getMonsterImage(actor.monster)}_3_v1@2x.png`} />
-                        <strong>{getMonsterName(actor.monster)}</strong>
+                        <select value={actor.monster} onChange={(e) => onActorChanged('monster', e.target.value)}>
+                            {items.reverse().map((item, idx) => <option key={idx} value={item['id']}>{item['name']} ({item['id']})</option>)}
+                        </select>
+                        <div>
+                            <img className={actor.flipped ? "flipped" : ""} src={actor.getAsset()} />
+                        </div>
                     </div>
                     <div>
                         <label>Evolution</label>
@@ -67,24 +70,4 @@ export default function ActorComponent({actor, onActorChanged}) {
             </div>
         </div>
     );
-}
-
-function getMonsterImage(monsterId) {
-    const monster = items.find(item => item['id'] == monsterId);
-    if (monster) {
-        return monster['img_name'];
-    }
-
-    return '';
-}
-
-
-function getMonsterName(monsterId) {
-    const monster = items.find(item => item['id'] == monsterId);
-    if (monster) {
-        console.log(monster);
-        return monster['name'];
-    }
-
-    return '';
 }

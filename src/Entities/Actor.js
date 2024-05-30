@@ -1,3 +1,5 @@
+import items from "../data/items";
+
 export default class Actor {
     static TYPE_MONSTER = 1;
     static TYPE_IMAGE   = 2;
@@ -18,5 +20,19 @@ export default class Actor {
 
         // Image
         this.image = '';
+    }
+
+    getAsset() {
+        if (Actor.TYPE_MONSTER === this.type) {
+            const monster = items.find(item => item['id'] == this.monster);
+            if (monster) {
+                const img_name = monster['img_name'];
+                return `http://mci-static-s1.socialpointgames.com/static/monstercity/mobile/ui/monsters/ui_${img_name}_${this.evolution}_v1@2x.png`;
+            }
+        } else if (Actor.TYPE_IMAGE === this.type) {
+
+        }
+
+        return '';
     }
 }
