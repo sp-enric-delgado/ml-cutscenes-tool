@@ -9,7 +9,7 @@ import Actor from "../../Entities/Actor";
 const CANVAS_WIDTH = 960;
 const CANVAS_HEIGHT = 540;
 
-export default function StepsSection({onPreviousClicked/*, scene*/}) {
+export default function StepsSection({scene, onPreviousClicked}) {
 
     //#region CANVAS
     const [canvas, setCanvas] = useState(null);
@@ -88,6 +88,11 @@ export default function StepsSection({onPreviousClicked/*, scene*/}) {
             <div>
                 <button onClick={onPreviousClicked}>Previous</button>
             </div>
+
+            <h3>Actors</h3>
+            <ul>
+                {scene.actors.map((actor, idx) => <li>{actor.name}</li>)}
+            </ul>
 
             <div className="body">
                 <div className="canvasSection">
