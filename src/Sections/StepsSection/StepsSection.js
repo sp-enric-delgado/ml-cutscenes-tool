@@ -57,7 +57,7 @@ export default function StepsSection({scene, onPreviousClicked}) {
 
             img.setOptions(options);
 
-            canvas.insert(img);
+            canvas.insertAt(img, 0);
             canvas.renderAll.bind(canvas);
 
         } catch (error) { console.log("[CANVAS COMPONENT] COULDN'T ADD IMAGE TO CANVAS: " + error); }
@@ -89,7 +89,7 @@ export default function StepsSection({scene, onPreviousClicked}) {
 
             <h3>Actors</h3>
             <ul>
-                {scene.actors.map((actor, idx) => <li>{actor.name}</li>)}
+                {scene.actors.map((actor, idx) => <li key={idx}>{actor.name}</li>)}
             </ul>
 
             <div className="body">
