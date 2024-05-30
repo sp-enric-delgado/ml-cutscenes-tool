@@ -9,7 +9,7 @@ import Actor from "../../Entities/Actor";
 const CANVAS_WIDTH = 960;
 const CANVAS_HEIGHT = 540;
 
-export default function StepsSection({onPreviousClicked, scene}) {
+export default function StepsSection({onPreviousClicked/*, scene*/}) {
 
     //#region CANVAS
     const [canvas, setCanvas] = useState(null);
@@ -28,6 +28,8 @@ export default function StepsSection({onPreviousClicked, scene}) {
         setCanvas(cnv);
     }, []);
 
+    /*
+    UNCOMMENT WHEN SCENE INFORMATION IS PASSED
     useEffect(() => {
         scene.actors.forEach(actor => {
             addImageToCanvas(actor.getAsset(), {
@@ -37,6 +39,7 @@ export default function StepsSection({onPreviousClicked, scene}) {
             });
         });
     }, [scene]);
+    */
 
     async function fabricImageFromURL(image_url) {
         return new Promise(function(resolve, reject) {
