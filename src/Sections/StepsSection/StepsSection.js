@@ -8,7 +8,7 @@ import {Step} from "../../Entities/Step";
 const CANVAS_WIDTH = 960;
 const CANVAS_HEIGHT = 540;
 
-export default function StepsSection({OnPreviousClicked}) {
+export default function StepsSection({onPreviousClicked}) {
 
     //#region CANVAS
     const [canvas, setCanvas] = useState(null);
@@ -45,7 +45,7 @@ export default function StepsSection({OnPreviousClicked}) {
     return (
         <div className="section">
             <div>
-                <button onClick={OnPreviousClicked}>Previous</button>
+                <button onClick={onPreviousClicked}>Previous</button>
             </div>
 
             <div className="body">
