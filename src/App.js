@@ -57,7 +57,12 @@ export default function App() {
         }
 
         setSteps(newSteps);
+    }
 
+    function modifyStepParam(idx, param, value) {
+        const newSteps = [...steps];
+        newSteps[idx].params[param] = value;
+        setSteps(newSteps);
     }
 
     function removeStep(idx) {
@@ -88,6 +93,7 @@ export default function App() {
                     steps={steps}
                     onAddStep={addStep}
                     onModifyStep={modifyStep}
+                    onModifyStepParam={modifyStepParam}
                     onRemoveStep={removeStep}
                     onPreviousClicked={() => navigateTo(PAGE_SCENE)}
                 />

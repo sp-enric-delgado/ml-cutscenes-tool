@@ -12,6 +12,7 @@ export default function StepsSection({
                                          steps,
                                          onAddStep,
                                          onModifyStep,
+                                         onModifyStepParam,
                                          onRemoveStep,
                                          onPreviousClicked
 }) {
@@ -70,6 +71,7 @@ export default function StepsSection({
                                 step={step}
                                 actors={scene.actors}
                                 onModifyStep={(prop, value) => onModifyStep(idx, prop, value)}
+                                onModifyStepParam={(param, value) => onModifyStepParam(idx, param, value)}
                             />
                         )}
                     </div>

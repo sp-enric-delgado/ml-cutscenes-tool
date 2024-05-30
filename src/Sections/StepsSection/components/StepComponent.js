@@ -1,6 +1,6 @@
 import {Action} from "../../../Entities/Action";
 
-export default function StepComponent({step, onModifyStep}) {
+export default function StepComponent({step, onModifyStep, onModifyStepParam}) {
     return(
         <div>
             <ul>
@@ -25,12 +25,11 @@ export default function StepComponent({step, onModifyStep}) {
                     </select>
                 </li>
                 {Object.keys(step.params).map((param, index) => (
-                        <li key={index}>
-                            <label htmlFor={param}>&emsp;{param}: </label>
-                            <input id={param} type={typeof(step.params[param])} defaultValue={step.params[param]}/>
-                        </li>
-                    ))
-                }
+                    <li key={index}>
+                        <label htmlFor={param}>&emsp;{param}: </label>
+                        <input id={param} type={typeof(step.params[param])} value={step.params[param]} onChange={(e) => onModifyStepParam(param, e.target.value)}/>
+                    </li>
+                ))}
             </ul>
             <hr/>
         </div>
