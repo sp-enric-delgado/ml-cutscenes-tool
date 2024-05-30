@@ -39,10 +39,7 @@ export default function ActorComponent({actor, onActorChanged}) {
                     </div>
                     <div>
                         <label>Flipped</label>
-                        <select value={actor.flipped} onChange={(e) => onActorChanged('flipped', e.target.value)}>
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
-                        </select>
+                        <input type="checkbox" value={actor.flipped} onChange={(e) => onActorChanged('flipped', e.target.checked)} />
                     </div>
                     <div>
                         <label>Default positions</label>

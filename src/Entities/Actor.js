@@ -15,7 +15,7 @@ export default class Actor {
         this.name             = '';
         this.monster          = 0;
         this.evolution        = 3;
-        this.flipped          = 0;
+        this.flipped          = false;
         this.defaultPositions = 0;
 
         // Image

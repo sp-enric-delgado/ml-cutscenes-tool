@@ -45,8 +45,7 @@ export default function SceneSection({onNextClicked}) {
                 <h2>Actors / Characters</h2>
                 <div className="clearfix">
                     {actors.map((actor, idx) =>
-                        <div key={idx} className="box float">
-                        <div key={idx} className="box">
+                        <div key={idx} className="float box">
                             <h2>Actor {idx + 1}</h2>
                             <ActorComponent
                                 actor={actor}
