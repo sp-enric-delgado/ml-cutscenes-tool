@@ -28,8 +28,7 @@ export default function StepsSection({scene, onPreviousClicked}) {
         setCanvas(cnv);
     }, []);
 
-    /*
-    UNCOMMENT WHEN SCENE INFORMATION IS PASSED
+
     useEffect(() => {
         scene.actors.forEach(actor => {
             addImageToCanvas(actor.getAsset(), {
@@ -39,7 +38,6 @@ export default function StepsSection({scene, onPreviousClicked}) {
             });
         });
     }, [scene]);
-    */
 
     async function fabricImageFromURL(image_url) {
         return new Promise(function(resolve, reject) {
