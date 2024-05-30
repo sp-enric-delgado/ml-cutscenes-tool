@@ -16,7 +16,6 @@ export default class Actor {
         this.monster          = 0;
         this.evolution        = 3;
         this.flipped          = false;
-        this.defaultPositions = 0;
 
         // Image
         this.image = '';
@@ -34,5 +33,30 @@ export default class Actor {
         }
 
         return '';
+    }
+
+    serialize() {
+        if (Actor.TYPE_MONSTER === this.type) {
+            return JSON.stringify({
+                'id': this.id,
+                'name': this.name,
+                'monster': this.monster,
+                'evolution': this.evolution,
+                'flipped': this.flipped ? 1 : 0,
+                'default_positions': 0,
+                'scale': this.scale,
+                'offset': this.offset,
+            });
+        } else if (Actor.TYPE_IMAGE === this.type) {
+            return JSON.stringify({
+                'id': this.id,
+                'name': this.name,
+                'image': this.image,
+                'scale': this.scale,
+                'offset': this.offset,
+            });
+        }
+
+        return {};
     }
 }

@@ -4,6 +4,7 @@ import StepsSection from "./Sections/StepsSection/StepsSection";
 import {useState} from "react";
 import Scene from "./Entities/Scene";
 import Actor from "./Entities/Actor";
+import OutputSection from "./Sections/OutputSection/OutputSection";
 
 const PAGE_SCENE = 1;
 const PAGE_STEPS = 2;
@@ -67,6 +68,7 @@ export default function App() {
                     onPreviousClicked={goToScene}
                 />
             </div>
+            <OutputSection scene={scene} />
         </div>
     );
 }
