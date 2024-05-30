@@ -38,7 +38,7 @@ export default function App() {
     function removeActor(idx) {
         const newScene = Scene.fromScene(scene);
         newScene.actors.splice(idx, 1);
-        setScene(scene);
+        setScene(newScene);
 
     }
 
