@@ -6,8 +6,8 @@ import StepComponent from "./components/StepComponent";
 import {Step} from "../../Entities/Step";
 import Actor from "../../Entities/Actor";
 
-const CANVAS_WIDTH = 960;
-const CANVAS_HEIGHT = 540;
+import {CANVAS_WIDTH, CANVAS_HEIGHT} from "../../data/canvasDimensions";
+import positions from "../../data/positions";
 
 export default function StepsSection({scene, onPreviousClicked}) {
 
@@ -30,11 +30,15 @@ export default function StepsSection({scene, onPreviousClicked}) {
 
 
     useEffect(() => {
+        canvas?.clear();
+
         scene.actors.forEach(actor => {
             addImageToCanvas(actor.getAsset(), {
                 id: actor.id,
                 type: actor.type,
-                flipX: actor.flipped
+                flipX: actor.flipped,
+                originX: 'center',
+                originY: 'bottom'
             });
         });
     }, [scene]);
@@ -56,6 +60,12 @@ export default function StepsSection({scene, onPreviousClicked}) {
             const img = await fabricImageFromURL(imageURL);
 
             img.setOptions(options);
+
+            img.setPositionByOrigin(
+                new fabric.Point(positions["LEFT_2"], 0),
+                options.originX,
+                options.originY
+            );
 
             canvas.insertAt(img, 0);
             canvas.renderAll.bind(canvas);

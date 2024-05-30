@@ -1,6 +1,6 @@
 import {fabric} from "fabric";
 
-function MoveCanvasElement(imageID, canvas, from, to){
+export function MoveCanvasElement(imageID, canvas, from, to){
     const currentPosition = GetImagePosition(canvas, imageID);
     if(currentPosition !== from) MoveCanvasElement(imageID, canvas, currentPosition, from);
 
@@ -24,7 +24,7 @@ function MoveCanvasElement(imageID, canvas, from, to){
     });
 }
 
-function MoveCanvasElementTimed(imageID, canvas, from, to, duration){
+export function MoveCanvasElementTimed(imageID, canvas, from, to, duration){
 
     const canvasImages = canvas.getObjects();
 
@@ -59,5 +59,3 @@ function GetImagePosition(canvas, imageID){
         }
     });
 }
-
-export default MoveCanvasElement;
