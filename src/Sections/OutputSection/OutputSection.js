@@ -9,7 +9,7 @@ export default function OutputSection({scene, steps}) {
             </pre>
             <h3>Steps</h3>
             <pre>
-
+                {steps.map((step) => step.serialize(scene.id) + "\n")}
             </pre>
         </div>
     )
