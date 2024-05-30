@@ -14,29 +14,54 @@ export default function StepsSection({onPreviousClicked, scene}) {
     //#region CANVAS
     const [canvas, setCanvas] = useState(null);
     const canvasRef = useRef();
+    //#endregion
 
+    //#region STEPS
+    const[steps, setSteps] = useState([]);
+    //#endregion
+
+    //#region FUNCTIONS
     useEffect(() => {
         var cnv = new fabric.Canvas(canvasRef.current);
         cnv.setDimensions({width: CANVAS_WIDTH, height: CANVAS_HEIGHT});
 
         setCanvas(cnv);
     }, []);
-    //#endregion
-
-    //#region STEPS
-    const[steps, setSteps] = useState([]);
 
     useEffect(() => {
         scene.actors.forEach(actor => {
-            fabric.Image.fromURL(actor.getAsset(), (img) => {
-                img.flipX = actor.flipped;
-            })
-        })
-
+            addImageToCanvas(actor.getAsset(), {
+                id: actor.id,
+                type: actor.type,
+                flipX: actor.flipped
+            });
+        });
     }, [scene]);
-    //#endregion
 
-    //#region FUNCTIONS
+    async function fabricImageFromURL(image_url) {
+        return new Promise(function(resolve, reject) {
+            try {
+                fabric.Image.fromURL(image_url, function (image) {
+                    resolve(image);
+                });
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+
+    async function addImageToCanvas(imageURL, options){
+        try{
+            const img = await fabricImageFromURL(imageURL);
+
+            img.setOptions(options);
+
+            canvas.insert(img);
+            canvas.renderAll.bind(canvas);
+
+        } catch (error) { console.log("[CANVAS COMPONENT] COULDN'T ADD IMAGE TO CANVAS: " + error); }
+    }
+
     function addStep(){
         setSteps([...steps, new Step()]);
     }
