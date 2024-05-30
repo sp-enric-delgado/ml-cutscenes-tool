@@ -30,7 +30,7 @@ export default class Actor {
                 return `http://mci-static-s1.socialpointgames.com/static/monstercity/mobile/ui/monsters/ui_${img_name}_${this.evolution}_v1@2x.png`;
             }
         } else if (Actor.TYPE_IMAGE === this.type) {
-
+            return `http://sp-static-content.s3.amazonaws.com/static/monstercity/mobile/ui/backgrounds/HD/${this.image}_v1.png`
         }
 
         return '';

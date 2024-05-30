@@ -79,3 +79,7 @@ label {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
+
+.asset-preview {
+    max-width: 200px;
+}

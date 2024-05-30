@@ -4,14 +4,16 @@ import items from "../../../data/items";
 export default function ActorComponent({actor, onActorChanged}) {
     return (
         <div>
-            <label>Actor type</label>
-            <select value={actor.type} onChange={(e) => onActorChanged('type', e.target.value)}>
-                <option value={Actor.TYPE_MONSTER}>Monster</option>
-                <option value={Actor.TYPE_IMAGE}>Image</option>
-            </select>
             <div>
                 <label>Id</label>
                 <input type="text" value={actor.id} onChange={(e) => onActorChanged('id', e.target.value)}/>
+            </div>
+            <div>
+                <label>Actor type</label>
+                <select value={actor.type} onChange={(e) => onActorChanged('type', e.target.value)}>
+                    <option value={Actor.TYPE_MONSTER}>Monster</option>
+                    <option value={Actor.TYPE_IMAGE}>Image</option>
+                </select>
             </div>
             {actor.type === Actor.TYPE_MONSTER &&
                 <div>
@@ -25,7 +27,7 @@ export default function ActorComponent({actor, onActorChanged}) {
                             {items.reverse().map((item, idx) => <option key={idx} value={item['id']}>{item['name']} ({item['id']})</option>)}
                         </select>
                         <div>
-                            <img className={actor.flipped ? "flipped" : ""} src={actor.getAsset()} />
+                            <img className={"asset-preview "+(actor.flipped ? "flipped" : "")} src={actor.getAsset()} />
                         </div>
                     </div>
                     <div>
@@ -41,16 +43,17 @@ export default function ActorComponent({actor, onActorChanged}) {
                         <label>Flipped</label>
                         <input type="checkbox" value={actor.flipped} onChange={(e) => onActorChanged('flipped', e.target.checked)} />
                     </div>
-                    <div>
-                        <label>Default positions</label>
-                        <input type="text" value={actor.defaultPositions} onChange={(e) => onActorChanged('defaultPositions', e.target.value)}/>
-                    </div>
                 </div>
             }
             {actor.type === Actor.TYPE_IMAGE &&
                 <div>
-                    <label>Image</label>
-                    <input type="text" value={actor.image} onChange={(e) => onActorChanged('image', e.target.value)}/>
+                    <div>
+                        <label>Image</label>
+                        <input type="text" value={actor.image} onChange={(e) => onActorChanged('image', e.target.value)}/>
+                    </div>
+                    <div>
+                        <img className={"asset-preview "+(actor.flipped ? "flipped" : "")} src={actor.getAsset()}/>
+                    </div>
                 </div>
             }
             <div>
