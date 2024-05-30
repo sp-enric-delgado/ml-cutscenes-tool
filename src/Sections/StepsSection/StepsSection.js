@@ -4,6 +4,7 @@ import { fabric } from 'fabric';
 import "./styles/StepsSection.css"
 import StepComponent from "./components/StepComponent";
 import {Step} from "../../Entities/Step";
+import Actor from "../../Entities/Actor";
 
 const CANVAS_WIDTH = 960;
 const CANVAS_HEIGHT = 540;
@@ -24,8 +25,18 @@ export default function StepsSection({scene, onPreviousClicked}) {
 
     //#region STEPS
     const[steps, setSteps] = useState([]);
+
+    useEffect(() => {
+        scene.actors.forEach(actor => {
+            fabric.Image.fromURL(actor.getAsset(), (img) => {
+                img.flipX = actor.flipped;
+            })
+        })
+
+    }, [scene]);
     //#endregion
 
+    //#region FUNCTIONS
     function addStep(){
         setSteps([...steps, new Step()]);
     }
@@ -41,7 +52,9 @@ export default function StepsSection({scene, onPreviousClicked}) {
 
         setSteps(newSteps);
     }
+    //#endregion
 
+    //#region RETURN
     return (
         <div className="section">
             <div>
@@ -76,4 +89,5 @@ export default function StepsSection({scene, onPreviousClicked}) {
 
         </div>
     );
+    //#endregion
 }
