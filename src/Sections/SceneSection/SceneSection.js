@@ -13,7 +13,7 @@ export default function SceneSection({
             <h1>Scene</h1>
             <div>
                 <label>Id</label>
-                <input type="text" value={scene.id}  onChange={(e) => onModifyScene('id', e.target.value)}/>
+                <input type="number" value={scene.id}  onChange={(e) => onModifyScene('id', e.target.value)}/>
             </div>
             <div>
                 <label>Internal name</label>
