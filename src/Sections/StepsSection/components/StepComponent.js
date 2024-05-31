@@ -1,6 +1,19 @@
 import {Action} from "../../../Entities/Action";
+import {useEffect, useState} from "react";
 
-export default function StepComponent({step, actors, onModifyStep, onModifyStepParam}) {
+export default function StepComponent({step, actors, onModifyStep, onModifyStepParam, playAction}) {
+    const [actionInfo, setActionInfo] = useState({});
+    const [sendInfo, setSendInfo] = useState(false);
+
+    useEffect(() => {
+        playAction(actionInfo);
+        setSendInfo(false);
+    }, [sendInfo]);
+
+    function updateActionInfo(key, value) {
+        setActionInfo({...actionInfo, [key]: value});
+    }
+
     return(
         <div>
             <ul>
@@ -30,10 +43,12 @@ export default function StepComponent({step, actors, onModifyStep, onModifyStepP
                 {Object.keys(step.params).map((param, index) => (
                     <li key={index}>
                         <label htmlFor={param}>&emsp;{param}: </label>
-                        <input id={param} type={typeof(step.params[param])} value={step.params[param]} onChange={(e) => onModifyStepParam(param, e.target.value)}/>
+                        <input id={param} type={typeof(step.params[param])} value={step.params[param]} onChange={(e) => {onModifyStepParam(param, e.target.value); updateActionInfo(param,e.target.value)}}/>
                     </li>
                 ))}
             </ul>
+
+            <button onClick={() => setSendInfo(true)}>Play</button>
             <hr/>
         </div>
     )

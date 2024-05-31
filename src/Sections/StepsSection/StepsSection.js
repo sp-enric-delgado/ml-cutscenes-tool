@@ -5,7 +5,7 @@ import "./styles/StepsSection.css"
 import StepComponent from "./components/StepComponent";
 
 import {CANVAS_WIDTH, CANVAS_HEIGHT} from "../../data/canvasDimensions";
-import {RIGHT_3} from "../../data/positions";
+import {CENTER_2} from "../../data/positions";
 
 export default function StepsSection({
                                          scene,
@@ -36,9 +36,7 @@ export default function StepsSection({
             addImageToCanvas(actor.getAsset(), {
                 id: actor.id,
                 type: actor.type,
-                flipX: actor.flipped/*,
-                originX: 'center',
-                originY: 'bottom'*/
+                flipX: actor.flipped
             });
         });
     }, [scene]);
@@ -62,7 +60,7 @@ export default function StepsSection({
             img.setOptions(options);
 
             img.setPositionByOrigin(
-                new fabric.Point(RIGHT_3.x, RIGHT_3.y),
+                new fabric.Point(CENTER_2.x, CENTER_2.y),
                 options.originX,
                 options.originY
             );
@@ -71,6 +69,10 @@ export default function StepsSection({
             canvas.renderAll.bind(canvas);
 
         } catch (error) { console.log("[CANVAS COMPONENT] COULDN'T ADD IMAGE TO CANVAS: " + error); }
+    }
+
+    function playCanvasAction(actionInfo){
+        console.log("Play Canvas Action: " + JSON.stringify(actionInfo));
     }
     //#endregion
 
@@ -102,6 +104,7 @@ export default function StepsSection({
                                 actors={scene.actors}
                                 onModifyStep={(prop, value) => onModifyStep(idx, prop, value)}
                                 onModifyStepParam={(param, value) => onModifyStepParam(idx, param, value)}
+                                playAction={playCanvasAction}
                             />
                         )}
                     </div>
