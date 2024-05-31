@@ -40,11 +40,13 @@ export class Step {
 
 function setupParams(action) {
     switch (action){
+        /*
         case Action.FADE:
             return {
                 "to": 0,
                 "duration": 0,
             };
+         */
 
         case Action.LOOK:
             return {
@@ -54,7 +56,7 @@ function setupParams(action) {
         case Action.MOVE:
             return {
                 "from": Action_Movement.OFFSCREEN_LEFT,
-                "to": Action_Movement.CENTER_1,
+                "to": Action_Movement.CENTER_2,
                 "duration": 0,
             };
 
@@ -62,12 +64,12 @@ function setupParams(action) {
             return {
                 "dialog": "",
             };
-
+        /*
         case Action.SKILL_EFFECT:
             return {
                 "effect": "",
                 "from": Action_Movement.OFFSCREEN_LEFT,
-                "offset": [0,0],
+                "offset": [0, 0],
                 "scale": 1,
                 "loop": 0,
                 "wait": 1,
@@ -90,7 +92,7 @@ function setupParams(action) {
                 "animation": Animation.BREATHE,
                 "loop": 0,
             }
-
+        */
         default:
             return {};
     }

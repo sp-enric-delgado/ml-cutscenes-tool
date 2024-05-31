@@ -1,11 +1,10 @@
 export default class Scene {
     constructor() {
-        this.id                = '';
-        this.internalName      = '';
-        this.skip              = true;
-        this.repeat            = true;
-        // this.defaultPositions  = 1;
-        this.actors            = [];
+        this.id           = '';
+        this.internalName = '';
+        this.skip         = true;
+        this.repeat       = true;
+        this.actors       = [];
     }
 
     static fromScene(scene) {
@@ -20,12 +19,13 @@ export default class Scene {
     }
 
     serialize() {
-        return this.id
-            + "\t" + this.internalName
-            + "\t" + (this.skip ? 1 : 0)
-            + "\t" + (this.repeat ? 1 : 0)
-            + "\t"
-            + 1 + "\t"
-            + "[" + this.actors.map(actor => actor.serialize()) + "]";
+        return [
+            this.id,
+            this.internalName,
+            this.skip ? 1 : 0,
+            this.repeat ? 1 : 0,
+            1,
+            "[" + this.actors.map(actor => actor.serialize()) + "]",
+        ].join("\t");
     }
 }

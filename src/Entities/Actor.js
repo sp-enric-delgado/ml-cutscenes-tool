@@ -12,10 +12,10 @@ export default class Actor {
         this.type   = Actor.TYPE_MONSTER;
 
         // Monster
-        this.name             = '';
-        this.monster          = 0;
-        this.evolution        = 3;
-        this.flipped          = false;
+        this.name      = '';
+        this.monster   = 0;
+        this.evolution = 3;
+        this.flipped   = false;
 
         // Image
         this.image = '';

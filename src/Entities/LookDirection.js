@@ -1,4 +1,6 @@
 export class LookDirection {
-    static LEFT;
-    static RIGHT;
+    static LEFT = 'left';
+    static RIGHT = 'right';
+
+    static ALL = [this.LEFT, this.RIGHT];
 }
