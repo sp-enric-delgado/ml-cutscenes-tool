@@ -52,8 +52,6 @@ export default function StepComponent({step, actors, onModifyStep, onModifyStepP
                                 <option></option>
                                 {LookDirection.ALL.map((direction, idx) => <option key={idx}>{direction}</option>)}
                             </select>
-                        ) : "duration" === param ? (
-                            <input id={param} type="number" value={step.params[param]} onChange={(e) => onModifyStepParam(param, e.target.value)}/>
                         ) :
                             <input id={param} type="text" value={step.params[param]} onChange={(e) => onModifyStepParam(param, e.target.value)}/>
                         }

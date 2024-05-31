@@ -27,13 +27,18 @@ export class Step {
     }
 
     serialize(sceneId) {
+        const params = {...this.params};
+        if (params.duration !== undefined) {
+            params.duration = parseFloat(params.duration);
+        }
+
         return [
             sceneId,
             this.step,
             this.delay,
             this.character,
             this.action,
-            JSON.stringify(this.params),
+            JSON.stringify(params),
         ].join("\t");
     }
 }
@@ -57,7 +62,7 @@ function setupParams(action) {
             return {
                 "from": Action_Movement.OFFSCREEN_LEFT,
                 "to": Action_Movement.CENTER_2,
-                "duration": 1000,
+                "duration": 1,
             };
 
         case Action.DIALOG:
