@@ -6,6 +6,8 @@ import StepComponent from "./components/StepComponent";
 
 import {CANVAS_WIDTH, CANVAS_HEIGHT} from "../../data/canvasDimensions";
 import {CENTER_2} from "../../data/positions";
+import {Action} from "../../Entities/Action";
+import {MoveCanvasElement, MoveCanvasElementTimed} from "./canvas_actions/CanvasActions";
 
 export default function StepsSection({
                                          scene,
@@ -72,7 +74,17 @@ export default function StepsSection({
     }
 
     function playCanvasAction(actionInfo){
-        console.log("Play Canvas Action: " + JSON.stringify(actionInfo));
+
+
+        switch (actionInfo.action){
+            case Action.MOVE:
+                MoveCanvasElement(actionInfo.id, canvas, actionInfo.params.from, actionInfo.params.to);
+                // MoveCanvasElementTimed(actionInfo.id, canvas, actionInfo.params.from, actionInfo.params.to, actionInfo.duration);
+                break;
+
+            default:
+                break;
+        }
     }
     //#endregion
 

@@ -15,13 +15,13 @@ export function MoveCanvasElement(imageID, canvas, from, to){
 
             currentImage.setPositionByOrigin(
                 new fabric.Point(to.x, to.y),
-                'top',
-                'left'
+                'center',
+                'bottom'
             );
-
-            canvas.renderAll();
         }
     });
+
+    canvas.renderAll();
 }
 
 export function MoveCanvasElementTimed(imageID, canvas, from, to, duration){
