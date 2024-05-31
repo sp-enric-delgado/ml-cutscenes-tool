@@ -1,7 +1,6 @@
 import {fabric} from "fabric";
 
 export function MoveCanvasElement(imageID, canvas, from, to){
-    console.log(`EXPECTED IMAGE POSITION: ${from}`);
     const currentPosition = GetImagePosition(canvas, imageID);
     if(currentPosition !== from) MoveCanvasElement(imageID, canvas, currentPosition, from);
 
@@ -14,15 +13,11 @@ export function MoveCanvasElement(imageID, canvas, from, to){
         {
             currentImage = imageObject;
 
-            console.log(`MONSTER ${imageID} MOVING FROM ${currentImage.getPointByOrigin('center', 'bottom')}`);
-
             currentImage.setPositionByOrigin(
                 new fabric.Point(to.x, to.y),
                 'center',
                 'center'
             );
-
-            console.log(`MONSTER ${imageID} MOVED TO ${currentImage.getPointByOrigin('center', 'bottom')}`);
         }
     });
 
@@ -33,17 +28,16 @@ export function MoveCanvasElementTimed(imageID, canvas, from, to, duration){
 
     const canvasImages = canvas.getObjects();
 
+    console.log("DURATION: " + duration);
+
     canvasImages.map(imageObject => {
 
         if(imageObject.id === imageID)
         {
-            imageObject.animate('center', to, {
-                from: from,
+            console.log(imageObject);
+            imageObject.animate('left', (to.x - (imageObject.width / 2)), {
                 duration: duration,
                 onChange: canvas.renderAll.bind(canvas),
-                onComplete: function() {
-                    canvas.renderAll();
-                },
                 easing: fabric.util.ease["easeInOutQuad"]
             });
         }
@@ -52,8 +46,6 @@ export function MoveCanvasElementTimed(imageID, canvas, from, to, duration){
 
 function GetImagePosition(canvas, imageID){
     if(canvas === null) return;
-
-    console.log(`IMAGE ${imageID} NOT POSITIONED AT FROM. GETTING IMAGE POSITION`);
 
     const canvasImages = canvas.getObjects();
 

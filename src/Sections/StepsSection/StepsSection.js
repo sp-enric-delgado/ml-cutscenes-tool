@@ -63,7 +63,7 @@ export default function StepsSection({
             img.setOptions(options);
 
             img.setPositionByOrigin(
-                new fabric.Point(LEFT_2.x, LEFT_2.y),
+                new fabric.Point(CENTER_2.x, CENTER_2.y),
                 options.originX,
                 options.originY
             );
@@ -79,10 +79,8 @@ export default function StepsSection({
 
         switch (actionInfo.action){
             case Action.MOVE:
-                console.log("POSITIONS: " + JSON.stringify(positions, null, 2));
-                console.log("MOVE MOVE TO CANVAS: " + actionInfo.params.from + " || " + positions[actionInfo.params.from]);
-                MoveCanvasElement(actionInfo.id, canvas, positions[actionInfo.params.from], positions[actionInfo.params.to]);
-                // MoveCanvasElementTimed(actionInfo.id, canvas, actionInfo.params.from, actionInfo.params.to, actionInfo.duration);
+                // MoveCanvasElement(actionInfo.id, canvas, positions[actionInfo.params.from], positions[actionInfo.params.to]);
+                MoveCanvasElementTimed(actionInfo.id, canvas, positions[actionInfo.params.from], positions[actionInfo.params.to], actionInfo.params.duration);
                 break;
 
             default:

@@ -57,7 +57,7 @@ function setupParams(action) {
             return {
                 "from": Action_Movement.OFFSCREEN_LEFT,
                 "to": Action_Movement.CENTER_2,
-                "duration": 0,
+                "duration": 1000,
             };
 
         case Action.DIALOG:
