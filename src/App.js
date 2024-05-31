@@ -49,19 +49,27 @@ export default function App() {
 
     function modifyStep(idx, prop, value) {
         const newSteps = [...steps];
+        const newStep = Step.fromStep(steps[idx]);
 
         if (prop === 'action') {
-            newSteps[idx].setAction(value);
+            newStep.setAction(value);
         } else {
-            newSteps[idx][prop] = value;
+            newStep[prop] = value;
         }
+
+        newSteps[idx] = newStep;
 
         setSteps(newSteps);
     }
 
     function modifyStepParam(idx, param, value) {
         const newSteps = [...steps];
-        newSteps[idx].params[param] = value;
+        const newStep = Step.fromStep(steps[idx]);
+
+        newStep.params[param] = value;
+
+        newSteps[idx] = newStep;
+
         setSteps(newSteps);
     }
 
