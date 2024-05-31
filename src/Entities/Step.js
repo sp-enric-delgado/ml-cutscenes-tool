@@ -10,13 +10,31 @@ export class Step {
         this.setAction(Action.NONE);
     };
 
+    static fromStep(step) {
+        const newStep = new Step();
+        newStep.step = step;
+        newStep.delay = step.delay;
+        newStep.character = step.character;
+        newStep.action = step.action;
+        newStep.params = {...step.params};
+
+        return newStep;
+    }
+
     setAction(action) {
         this.action = action;
         this.params = setupParams(this.action);
     }
 
     serialize(sceneId) {
-        return [sceneId, this.step, this.delay, this.character, this.action, JSON.stringify(this.params)].join("\t");
+        return [
+            sceneId,
+            this.step,
+            this.delay,
+            this.character,
+            this.action,
+            JSON.stringify(this.params),
+        ].join("\t");
     }
 }
 
