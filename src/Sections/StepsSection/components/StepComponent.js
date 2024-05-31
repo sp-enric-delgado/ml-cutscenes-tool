@@ -1,5 +1,6 @@
-import {Action} from "../../../Entities/Action";
+import {Action, Action_Movement} from "../../../Entities/Action";
 import {useEffect, useState} from "react";
+import {LookDirection} from "../../../Entities/LookDirection";
 
 export default function StepComponent({step, actors, onModifyStep, onModifyStepParam, playAction}) {
     const [actionInfo, setActionInfo] = useState({});
@@ -35,7 +36,7 @@ export default function StepComponent({step, actors, onModifyStep, onModifyStepP
                 <li>
                     <label htmlFor="actionInput">Action: </label>
                     <select id="actionInput" value={step.action} onChange={(e) => onModifyStep('action', e.target.value)}>
-                        {Action.ALL_ACTIONS.map((action, index) => (
+                        {Action.ALL.map((action, index) => (
                             <option key={index} value={action}>{action}</option>
                         ))}
                     </select>
@@ -43,7 +44,21 @@ export default function StepComponent({step, actors, onModifyStep, onModifyStepP
                 {Object.keys(step.params).map((param, index) => (
                     <li key={index}>
                         <label htmlFor={param}>&emsp;{param}: </label>
-                        <input id={param} type={typeof(step.params[param])} value={step.params[param]} onChange={(e) => {onModifyStepParam(param, e.target.value); updateActionInfo(param,e.target.value)}}/>
+                        {(Action.MOVE === step.action && ["from", "to"].includes(param)) ? (
+                            <select id={param} value={step.params[param]} onChange={(e) => onModifyStepParam(param, e.target.value)}>
+                                <option></option>
+                                {Action_Movement.ALL.map((movement, idx) => <option key={idx}>{movement}</option>)}
+                            </select>
+                        ) : (Action.LOOK === step.action && "direction" === param) ? (
+                            <select id={param} value={step.params[param]} onChange={(e) => onModifyStepParam(param, e.target.value)}>
+                                <option></option>
+                                {LookDirection.ALL.map((direction, idx) => <option key={idx}>{direction}</option>)}
+                            </select>
+                        ) : "duration" === param ? (
+                            <input id={param} type="number" value={step.params[param]} onChange={(e) => onModifyStepParam(param, e.target.value)}/>
+                        ) :
+                            <input id={param} type="text" value={step.params[param]} onChange={(e) => onModifyStepParam(param, e.target.value)}/>
+                        }
                     </li>
                 ))}
             </ul>
