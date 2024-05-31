@@ -5,7 +5,7 @@ import "./styles/StepsSection.css"
 import StepComponent from "./components/StepComponent";
 
 import {CANVAS_WIDTH, CANVAS_HEIGHT} from "../../data/canvasDimensions";
-import positions from "../../data/positions";
+import {RIGHT_3} from "../../data/positions";
 
 export default function StepsSection({
                                          scene,
@@ -36,9 +36,9 @@ export default function StepsSection({
             addImageToCanvas(actor.getAsset(), {
                 id: actor.id,
                 type: actor.type,
-                flipX: actor.flipped,
+                flipX: actor.flipped/*,
                 originX: 'center',
-                originY: 'bottom'
+                originY: 'bottom'*/
             });
         });
     }, [scene]);
@@ -62,7 +62,7 @@ export default function StepsSection({
             img.setOptions(options);
 
             img.setPositionByOrigin(
-                new fabric.Point(positions["LEFT_2"], 0),
+                new fabric.Point(RIGHT_3.x, RIGHT_3.y),
                 options.originX,
                 options.originY
             );
