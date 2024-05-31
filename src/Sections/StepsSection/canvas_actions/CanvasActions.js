@@ -9,7 +9,6 @@ export function MoveCanvasElement(imageId, canvas, from, to){
     if (currentImage) {
         currentImage.setPositionByOrigin(
             new fabric.Point(to.x, to.y),
-            'center',
             'center'
         );
     }

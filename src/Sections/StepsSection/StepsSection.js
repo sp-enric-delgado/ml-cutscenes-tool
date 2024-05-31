@@ -99,6 +99,27 @@ export default function StepsSection({
                 break;
         }
     }
+
+    function playAllSteps(){
+        const groupedSteps = groupSteps();
+
+        console.log(groupedSteps);
+    }
+
+    function groupSteps(){
+        let groupedSteps = [];
+
+        for(let i = 0; i < steps.length; i++){
+            // orderedSteps[steps[i].step] = {character: steps[i].character, action: steps[i].action};
+            if (!groupedSteps[steps[i].step]) {
+                groupedSteps[steps[i].step] = [];
+            }
+
+            groupedSteps[steps[i].step].push({character: steps[i].character, action: steps[i].action});
+        }
+
+        return groupedSteps;
+    }
     //#endregion
 
     //#region RETURN
@@ -120,9 +141,10 @@ export default function StepsSection({
                     <div className="stepsSeciton--header">
                         <h1 className="title">Steps</h1>
                         <button onClick={onAddStep}>+</button>
+                        <button onClick={playAllSteps}>Play All</button>
                     </div>
                     <div className="stepsSection--steps">
-                        {steps.map((step, idx) =>
+                    {steps.map((step, idx) =>
                             <StepComponent
                                 key={idx}
                                 step={step}
