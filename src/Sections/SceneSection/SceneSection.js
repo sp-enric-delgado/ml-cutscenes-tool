@@ -29,6 +29,7 @@ export default function SceneSection({
             </div>
             <div>
                 <h2>Actors / Characters</h2>
+                <button onClick={onAddActor}>Add Actor</button>
                 <div className="clearfix">
                     {scene.actors.map((actor, idx) =>
                         <div key={idx} className="float box">
@@ -41,7 +42,6 @@ export default function SceneSection({
                         </div>
                     )}
                 </div>
-                <button onClick={onAddActor}>Add Actor</button>
             </div>
 
             <button onClick={onNextClicked}>Next</button>
