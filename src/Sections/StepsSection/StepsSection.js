@@ -85,8 +85,6 @@ export default function StepsSection({
     }
 
     function playCanvasAction(actionInfo){
-
-
         switch (actionInfo.action){
             case Action.MOVE:
                 // MoveCanvasElement(actionInfo.id, canvas, positions[actionInfo.params.from], positions[actionInfo.params.to]);

@@ -1,60 +1,56 @@
 import {fabric} from "fabric";
+import {Action_Movement} from "../../../Entities/Action";
 
-export function MoveCanvasElement(imageID, canvas, from, to){
-    const currentPosition = GetImagePosition(canvas, imageID);
-    if(currentPosition !== from) MoveCanvasElement(imageID, canvas, currentPosition, from);
-
-    var currentImage;
+export function MoveCanvasElement(imageId, canvas, from, to){
     const canvasImages = canvas.getObjects();
 
-    canvasImages.map(imageObject => {
+    const currentImage = canvasImages.find(imageObject => imageObject.id === imageId);
 
-        if(imageObject.id === imageID)
-        {
-            currentImage = imageObject;
-
-            currentImage.setPositionByOrigin(
-                new fabric.Point(to.x, to.y),
-                'center',
-                'center'
-            );
-        }
-    });
+    if (currentImage) {
+        currentImage.setPositionByOrigin(
+            new fabric.Point(to.x, to.y),
+            'center',
+            'center'
+        );
+    }
 
     canvas.renderAll();
 }
 
-export function MoveCanvasElementTimed(imageID, canvas, from, to, duration){
-
+export function MoveCanvasElementTimed(imageId, canvas, from, to, duration){
     const canvasImages = canvas.getObjects();
 
-    console.log("DURATION: " + duration);
+    MoveCanvasElement(imageId, canvas, Action_Movement.OFFSCREEN_LEFT, from, 0);
 
-    canvasImages.map(imageObject => {
-
-        if(imageObject.id === imageID)
-        {
-            console.log(imageObject);
-            imageObject.animate('left', (to.x - (imageObject.width / 2)), {
-                duration: duration,
-                onChange: canvas.renderAll.bind(canvas),
-                easing: fabric.util.ease["easeInOutQuad"]
-            });
-        }
-    });
+    const imageObject = canvasImages.find(imageObject => imageObject.id === imageId);
+    if (imageObject) {
+        console.log(duration);
+        imageObject.animate('left', (to.x - (imageObject.width / 2)), {
+            duration: duration,
+            onChange: canvas.renderAll.bind(canvas),
+            easing: fabric.util.ease["easeInOutQuad"]
+        });
+    }
 }
 
-function GetImagePosition(canvas, imageID){
-    if(canvas === null) return;
+/*
+function getImagePosition(canvas, imageID){
+    if (canvas === null) {
+        return;
+    }
 
     const canvasImages = canvas.getObjects();
 
     if(canvasImages.length === 0) return;
 
-    canvasImages.map(imageObject => {
-        if(imageObject.id === imageID)
-        {
-            return({"pos": imageObject.getPointByOrigin('center', 'center')});
-        }
-    });
+    const imageObject = canvasImages.find(imageObject => imageObject.id === imageID);
+
+    if (!imageObject) {
+        throw new Error(`Can't find image with id ${imageID}`);
+    }
+
+    return {
+        "pos": imageObject.getPointByOrigin('center', 'center'),
+    };
 }
+*/
