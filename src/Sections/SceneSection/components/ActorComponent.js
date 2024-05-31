@@ -15,7 +15,7 @@ export default function ActorComponent({actor, onActorChanged}) {
                     <option value={Actor.TYPE_IMAGE}>Image</option>
                 </select>
             </div>
-            {actor.type === Actor.TYPE_MONSTER &&
+            {actor.isMonster() &&
                 <div>
                     <div>
                         <label>Name</label>
@@ -45,7 +45,7 @@ export default function ActorComponent({actor, onActorChanged}) {
                     </div>
                 </div>
             }
-            {actor.type === Actor.TYPE_IMAGE &&
+            {actor.isImage() &&
                 <div>
                     <div>
                         <label>Image</label>

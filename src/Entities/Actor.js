@@ -21,6 +21,18 @@ export default class Actor {
         this.image = '';
     }
 
+    isBackground() {
+        return Actor.TYPE_IMAGE === this.type;
+    }
+
+    isImage() {
+        return Actor.TYPE_IMAGE === this.type;
+    }
+
+    isMonster() {
+        return Actor.TYPE_MONSTER === this.type;
+    }
+
     getAsset() {
         if (Actor.TYPE_MONSTER === this.type) {
             const monster = items.find(item => item['id'] == this.monster);
@@ -36,7 +48,7 @@ export default class Actor {
     }
 
     serialize() {
-        if (Actor.TYPE_MONSTER === this.type) {
+        if (this.isMonster()) {
             return JSON.stringify({
                 'id': this.id,
                 'name': this.name,
@@ -47,7 +59,7 @@ export default class Actor {
                 'scale': this.scale,
                 'offset': this.offset,
             });
-        } else if (Actor.TYPE_IMAGE === this.type) {
+        } else if (this.isImage()) {
             return JSON.stringify({
                 'id': this.id,
                 'name': this.name,

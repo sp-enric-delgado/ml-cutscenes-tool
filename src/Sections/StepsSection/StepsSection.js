@@ -39,7 +39,8 @@ export default function StepsSection({
             addImageToCanvas(actor.getAsset(), {
                 id: actor.id,
                 type: actor.type,
-                flipX: actor.flipped
+                flipX: actor.flipped,
+                isBackground: actor.isBackground(),
             });
         });
     }, [scene]);
@@ -62,10 +63,14 @@ export default function StepsSection({
 
             img.setOptions(options);
 
+            if (options.isBackground) {
+                img.scaleToHeight(CANVAS_HEIGHT);
+            }
+
             img.setPositionByOrigin(
                 new fabric.Point(CENTER_2.x, CENTER_2.y),
                 options.originX,
-                options.originY
+                options.originY,
             );
 
             canvas.insertAt(img, 0);
