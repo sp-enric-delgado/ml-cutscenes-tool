@@ -5,7 +5,8 @@ import "./styles/StepsSection.css"
 import StepComponent from "./components/StepComponent";
 
 import {CANVAS_WIDTH, CANVAS_HEIGHT} from "../../data/canvasDimensions";
-import {CENTER_2} from "../../data/positions";
+import {CENTER_2, LEFT_2, positions, RIGHT_2} from "../../data/positions";
+
 import {Action} from "../../Entities/Action";
 import {MoveCanvasElement, MoveCanvasElementTimed} from "./canvas_actions/CanvasActions";
 
@@ -62,7 +63,7 @@ export default function StepsSection({
             img.setOptions(options);
 
             img.setPositionByOrigin(
-                new fabric.Point(CENTER_2.x, CENTER_2.y),
+                new fabric.Point(LEFT_2.x, LEFT_2.y),
                 options.originX,
                 options.originY
             );
@@ -78,7 +79,9 @@ export default function StepsSection({
 
         switch (actionInfo.action){
             case Action.MOVE:
-                MoveCanvasElement(actionInfo.id, canvas, actionInfo.params.from, actionInfo.params.to);
+                console.log("POSITIONS: " + JSON.stringify(positions, null, 2));
+                console.log("MOVE MOVE TO CANVAS: " + actionInfo.params.from + " || " + positions[actionInfo.params.from]);
+                MoveCanvasElement(actionInfo.id, canvas, positions[actionInfo.params.from], positions[actionInfo.params.to]);
                 // MoveCanvasElementTimed(actionInfo.id, canvas, actionInfo.params.from, actionInfo.params.to, actionInfo.duration);
                 break;
 
