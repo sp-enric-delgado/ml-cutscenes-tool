@@ -12,7 +12,7 @@ export class Step {
 
     static fromStep(step) {
         const newStep = new Step();
-        newStep.step = step;
+        newStep.step = step.step;
         newStep.delay = step.delay;
         newStep.character = step.character;
         newStep.action = step.action;
