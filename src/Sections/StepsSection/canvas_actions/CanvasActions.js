@@ -33,3 +33,18 @@ export function MoveCanvasElementTimed(imageId, canvas, from, to, duration){
     }
 }
 
+export function FlipCanvasElement(imageId, direction, canvas){
+    const canvasImages = canvas.getObjects();
+    const imageObject = canvasImages.find(imageObject => imageObject.id === imageId);
+
+    console.log(JSON.stringify(direction, null, 2));
+
+    if (imageObject && imageObject.flipDir !== direction) {
+        imageObject.set({
+            flipDir: direction,
+            flipX: !imageObject.flipX
+        })
+
+        canvas.renderAll();
+    }
+}

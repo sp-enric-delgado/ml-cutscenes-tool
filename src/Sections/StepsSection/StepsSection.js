@@ -8,7 +8,7 @@ import {CANVAS_WIDTH, CANVAS_HEIGHT} from "../../data/canvasDimensions";
 import {CENTER_2, LEFT_2, positions, RIGHT_2} from "../../data/positions";
 
 import {Action} from "../../Entities/Action";
-import {MoveCanvasElementTimed} from "./canvas_actions/CanvasActions";
+import {MoveCanvasElementTimed, FlipCanvasElement} from "./canvas_actions/CanvasActions";
 
 /**
  * @param {Scene} scene
@@ -44,6 +44,7 @@ export default function StepsSection({
             addImageToCanvas(actor.getAsset(), {
                 id: actor.id,
                 type: actor.type,
+                flipDir: actor.flipped === false ? "right" : "left",
                 flipX: actor.flipped,
                 isBackground: actor.isBackground(),
             });
@@ -88,6 +89,10 @@ export default function StepsSection({
         switch (actionInfo.action){
             case Action.MOVE:
                 MoveCanvasElementTimed(actionInfo.id, canvas, positions[actionInfo.params.from], positions[actionInfo.params.to], actionInfo.params.duration);
+                break;
+
+            case Action.LOOK:
+                FlipCanvasElement(actionInfo.id, actionInfo.params.direction, canvas);
                 break;
 
             default:
