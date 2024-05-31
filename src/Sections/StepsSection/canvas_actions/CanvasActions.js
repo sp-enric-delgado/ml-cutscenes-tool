@@ -18,11 +18,10 @@ export function MoveCanvasElement(imageId, canvas, from, to){
 }
 
 export function MoveCanvasElementTimed(imageId, canvas, from, to, duration){
-    const canvasImages = canvas.getObjects();
+    const imageObject = getImageObject(canvas, imageId);
 
     MoveCanvasElement(imageId, canvas, Action_Movement.OFFSCREEN_LEFT, from, 0);
 
-    const imageObject = canvasImages.find(imageObject => imageObject.id === imageId);
     if (imageObject) {
         console.log(duration);
         imageObject.animate('left', (to.x - (imageObject.width / 2)), {
@@ -34,8 +33,7 @@ export function MoveCanvasElementTimed(imageId, canvas, from, to, duration){
 }
 
 export function FlipCanvasElement(imageId, direction, canvas){
-    const canvasImages = canvas.getObjects();
-    const imageObject = canvasImages.find(imageObject => imageObject.id === imageId);
+    const imageObject = getImageObject(canvas, imageId);
 
     console.log(JSON.stringify(direction, null, 2));
 
@@ -48,3 +46,11 @@ export function FlipCanvasElement(imageId, direction, canvas){
         canvas.renderAll();
     }
 }
+
+
+//#region INTERNAL FUNCTIONS
+function getImageObject(canvas, imageID){
+    const canvasImages = canvas.getObjects();
+    return canvasImages.find(imageObject => imageObject.id === imageID);
+}
+//#endregion
