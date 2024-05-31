@@ -10,6 +10,11 @@ import {CENTER_2, LEFT_2, positions, RIGHT_2} from "../../data/positions";
 import {Action} from "../../Entities/Action";
 import {MoveCanvasElement, MoveCanvasElementTimed} from "./canvas_actions/CanvasActions";
 
+/**
+ * @param {Scene} scene
+ * @param {Step[]} steps
+ * @returns {JSX.Element}
+ */
 export default function StepsSection({
                                          scene,
                                          steps,

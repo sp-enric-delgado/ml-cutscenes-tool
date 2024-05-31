@@ -4,7 +4,9 @@ export default class Scene {
         this.internalName = '';
         this.skip         = true;
         this.repeat       = true;
-        this.actors       = [];
+
+        /** @type {Actor[]} **/
+        this.actors = [];
     }
 
     static fromScene(scene) {
