@@ -33,24 +33,3 @@ export function MoveCanvasElementTimed(imageId, canvas, from, to, duration){
     }
 }
 
-/*
-function getImagePosition(canvas, imageID){
-    if (canvas === null) {
-        return;
-    }
-
-    const canvasImages = canvas.getObjects();
-
-    if(canvasImages.length === 0) return;
-
-    const imageObject = canvasImages.find(imageObject => imageObject.id === imageID);
-
-    if (!imageObject) {
-        throw new Error(`Can't find image with id ${imageID}`);
-    }
-
-    return {
-        "pos": imageObject.getPointByOrigin('center', 'center'),
-    };
-}
-*/
