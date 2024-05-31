@@ -4,13 +4,16 @@ import StepsSection from "./Sections/StepsSection/StepsSection";
 import {useState} from "react";
 import Scene from "./Entities/Scene";
 import Actor from "./Entities/Actor";
+import OutputSection from "./Sections/OutputSection/OutputSection";
+import {Step} from "./Entities/Step";
 
 const PAGE_SCENE = 1;
 const PAGE_STEPS = 2;
 
 export default function App() {
-    const [currentPage, setCurrentPage] = useState(PAGE_SCENE);
     const [scene, setScene] = useState(new Scene());
+    const [steps, setSteps] = useState([]);
+    const [currentPage, setCurrentPage] = useState(PAGE_SCENE);
 
     function modifyScene(prop, value) {
         const newScene = Scene.fromScene(scene);
@@ -37,16 +40,39 @@ export default function App() {
     function removeActor(idx) {
         const newScene = Scene.fromScene(scene);
         newScene.actors.splice(idx, 1);
-        setScene(scene);
-
+        setScene(newScene);
     }
 
-    function goToSteps() {
-        setCurrentPage(PAGE_STEPS);
+    function addStep(){
+        setSteps([...steps, new Step()]);
     }
 
-    function goToScene() {
-        setCurrentPage(PAGE_SCENE);
+    function modifyStep(idx, prop, value) {
+        const newSteps = [...steps];
+
+        if (prop === 'action') {
+            newSteps[idx].setAction(value);
+        } else {
+            newSteps[idx][prop] = value;
+        }
+
+        setSteps(newSteps);
+    }
+
+    function modifyStepParam(idx, param, value) {
+        const newSteps = [...steps];
+        newSteps[idx].params[param] = value;
+        setSteps(newSteps);
+    }
+
+    function removeStep(idx) {
+        const newSteps = [...steps];
+        newSteps.splice(idx, 1);
+        setSteps(newSteps);
+    }
+
+    function navigateTo(page) {
+        setCurrentPage(page);
     }
 
     return (
@@ -58,15 +84,21 @@ export default function App() {
                     onAddActor={addActor}
                     onModifyActor={modifyActor}
                     onRemoveActor={removeActor}
-                    onNextClicked={goToSteps}
+                    onNextClicked={() => navigateTo(PAGE_STEPS)}
                 />
             </div>
             <div className={currentPage !== PAGE_STEPS ? "hidden" : ""}>
                 <StepsSection
                     scene={scene}
-                    onPreviousClicked={goToScene}
+                    steps={steps}
+                    onAddStep={addStep}
+                    onModifyStep={modifyStep}
+                    onModifyStepParam={modifyStepParam}
+                    onRemoveStep={removeStep}
+                    onPreviousClicked={() => navigateTo(PAGE_SCENE)}
                 />
             </div>
+            <OutputSection scene={scene} steps={steps} />
         </div>
     );
 }

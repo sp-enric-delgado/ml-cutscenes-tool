@@ -4,7 +4,7 @@ export default class Scene {
         this.internalName      = '';
         this.skip              = true;
         this.repeat            = true;
-        this.defaultPositions  = 1;
+        // this.defaultPositions  = 1;
         this.actors            = [];
     }
 
@@ -17,5 +17,15 @@ export default class Scene {
         newScene.actors       = [...scene.actors];
 
         return newScene;
+    }
+
+    serialize() {
+        return this.id
+            + "\t" + this.internalName
+            + "\t" + (this.skip ? 1 : 0)
+            + "\t" + (this.repeat ? 1 : 0)
+            + "\t"
+            + 1 + "\t"
+            + "[" + this.actors.map(actor => actor.serialize()) + "]";
     }
 }

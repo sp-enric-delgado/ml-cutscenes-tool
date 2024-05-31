@@ -13,7 +13,7 @@ export default function SceneSection({
             <h1>Scene</h1>
             <div>
                 <label>Id</label>
-                <input type="text" value={scene.id}  onChange={(e) => onModifyScene('id', e.target.value)}/>
+                <input type="number" value={scene.id}  onChange={(e) => onModifyScene('id', e.target.value)}/>
             </div>
             <div>
                 <label>Internal name</label>
@@ -21,11 +21,11 @@ export default function SceneSection({
             </div>
             <div>
                 <label>Skip</label>
-                <input type="checkbox" value={scene.skip} onChange={(e) => onModifyScene('skip', e.target.value)}/>
+                <input type="checkbox" checked={scene.skip} onChange={(e) => onModifyScene('skip', e.target.checked)}/>
             </div>
             <div>
                 <label>Repeat</label>
-                <input type="checkbox" value={scene.repeat} onChange={(e) => onModifyScene('repeat', e.target.value)}/>
+                <input type="checkbox" checked={scene.repeat} onChange={(e) => onModifyScene('repeat', e.target.checked)}/>
             </div>
             <div>
                 <h2>Actors / Characters</h2>

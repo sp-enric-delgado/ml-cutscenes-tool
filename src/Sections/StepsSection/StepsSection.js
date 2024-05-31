@@ -3,21 +3,22 @@ import { fabric } from 'fabric';
 
 import "./styles/StepsSection.css"
 import StepComponent from "./components/StepComponent";
-import {Step} from "../../Entities/Step";
-import Actor from "../../Entities/Actor";
 
 import {CANVAS_WIDTH, CANVAS_HEIGHT} from "../../data/canvasDimensions";
 import positions from "../../data/positions";
 
-export default function StepsSection({scene, onPreviousClicked}) {
-
+export default function StepsSection({
+                                         scene,
+                                         steps,
+                                         onAddStep,
+                                         onModifyStep,
+                                         onModifyStepParam,
+                                         onRemoveStep,
+                                         onPreviousClicked
+}) {
     //#region CANVAS
     const [canvas, setCanvas] = useState(null);
     const canvasRef = useRef();
-    //#endregion
-
-    //#region STEPS
-    const[steps, setSteps] = useState([]);
     //#endregion
 
     //#region FUNCTIONS
@@ -27,7 +28,6 @@ export default function StepsSection({scene, onPreviousClicked}) {
 
         setCanvas(cnv);
     }, []);
-
 
     useEffect(() => {
         canvas?.clear();
@@ -72,22 +72,6 @@ export default function StepsSection({scene, onPreviousClicked}) {
 
         } catch (error) { console.log("[CANVAS COMPONENT] COULDN'T ADD IMAGE TO CANVAS: " + error); }
     }
-
-    function addStep(){
-        setSteps([...steps, new Step()]);
-    }
-
-    function onStepChanged(idx, prop, value) {
-        const newSteps = [...steps];
-
-        if (prop === 'action') {
-            newSteps[idx].setAction(value);
-        } else {
-            newSteps[idx][prop] = value;
-        }
-
-        setSteps(newSteps);
-    }
     //#endregion
 
     //#region RETURN
@@ -96,11 +80,6 @@ export default function StepsSection({scene, onPreviousClicked}) {
             <div>
                 <button onClick={onPreviousClicked}>Previous</button>
             </div>
-
-            <h3>Actors</h3>
-            <ul>
-                {scene.actors.map((actor, idx) => <li key={idx}>{actor.name}</li>)}
-            </ul>
 
             <div className="body">
                 <div className="canvasSection">
@@ -113,11 +92,17 @@ export default function StepsSection({scene, onPreviousClicked}) {
                 <div className="stepsSection">
                     <div className="stepsSeciton--header">
                         <h1 className="title">Steps</h1>
-                        <button onClick={addStep}>+</button>
+                        <button onClick={onAddStep}>+</button>
                     </div>
                     <div className="stepsSection--steps">
                         {steps.map((step, idx) =>
-                            <StepComponent key={idx} step={step} onStepChanged={(prop, value) => onStepChanged(idx, prop, value)}/>
+                            <StepComponent
+                                key={idx}
+                                step={step}
+                                actors={scene.actors}
+                                onModifyStep={(prop, value) => onModifyStep(idx, prop, value)}
+                                onModifyStepParam={(param, value) => onModifyStepParam(idx, param, value)}
+                            />
                         )}
                     </div>
                 </div>
