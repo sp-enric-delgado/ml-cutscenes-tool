@@ -8,7 +8,7 @@ import {CANVAS_WIDTH, CANVAS_HEIGHT} from "../../data/canvasDimensions";
 import {CENTER_2, LEFT_2, positions, RIGHT_2} from "../../data/positions";
 
 import {Action} from "../../Entities/Action";
-import {MoveCanvasElementTimed, FlipCanvasElement} from "./canvas_actions/CanvasActions";
+import { onCanvasActionEndedEvent, MoveCanvasElementTimed, FlipCanvasElement} from "./canvas_actions/CanvasActions";
 
 /**
  * @param {Scene} scene
@@ -50,6 +50,10 @@ export default function StepsSection({
             });
         });
     }, [scene]);
+
+    useEffect(() => {
+        document.addEventListener(onCanvasActionEndedEvent, OnCanvasActionEnded);
+    }, [])
 
     async function fabricImageFromURL(image_url) {
         return new Promise(function(resolve, reject) {
@@ -119,6 +123,10 @@ export default function StepsSection({
         }
 
         return groupedSteps;
+    }
+
+    function OnCanvasActionEnded(event) {
+        console.log("onActionCanvasEnded");
     }
     //#endregion
 
