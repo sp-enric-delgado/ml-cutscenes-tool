@@ -10,6 +10,9 @@ import {CENTER_2, LEFT_2, positions, RIGHT_2} from "../../data/positions";
 import {Action} from "../../Entities/Action";
 import { onCanvasActionEndedEvent, MoveCanvasElementTimed, FlipCanvasElement} from "./canvas_actions/CanvasActions";
 
+let playingStep = 0;
+let continuousPlay = false;
+
 /**
  * @param {Scene} scene
  * @param {Step[]} steps
@@ -52,8 +55,32 @@ export default function StepsSection({
     }, [scene]);
 
     useEffect(() => {
-        document.addEventListener(onCanvasActionEndedEvent, OnCanvasActionEnded);
-    }, [])
+        console.log(steps);
+        document.removeEventListener("onCanvasActionEnded", onCanvasActionEnded);
+        document.addEventListener("onCanvasActionEnded", onCanvasActionEnded);
+    }, [steps])
+
+    function onCanvasActionEnded() {
+        // debugger;
+        if (!continuousPlay) {
+            return;
+        }
+
+        playingStep++;
+
+        if (playingStep > steps.length) {
+            continuousPlay = false;
+            return;
+        }
+
+        const actionInfo = {
+            action: steps[playingStep].action,
+            id: steps[playingStep].character,
+            params: steps[playingStep].params,
+        };
+
+        playCanvasAction(actionInfo);
+    }
 
     async function fabricImageFromURL(image_url) {
         return new Promise(function(resolve, reject) {
@@ -105,7 +132,18 @@ export default function StepsSection({
     }
 
     function playAllSteps(){
+        playingStep = 0;
+        continuousPlay = true;
+
         const groupedSteps = groupSteps();
+
+        const actionInfo = {
+            action: steps[playingStep].action,
+            id: steps[playingStep].character,
+            params: steps[playingStep].params,
+        };
+
+        playCanvasAction(actionInfo);
 
         console.log(groupedSteps);
     }
@@ -123,10 +161,6 @@ export default function StepsSection({
         }
 
         return groupedSteps;
-    }
-
-    function OnCanvasActionEnded(event) {
-        console.log("onActionCanvasEnded");
     }
     //#endregion
 

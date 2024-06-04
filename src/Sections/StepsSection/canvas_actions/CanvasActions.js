@@ -1,7 +1,7 @@
 import {fabric} from "fabric";
 import {Action_Movement} from "../../../Entities/Action";
 
-export const onCanvasActionEndedEvent = new Event("onCanvasActionEnded");
+// export const onCanvasActionEndedEvent = new Event("onCanvasActionEnded");
 
 export function MoveCanvasElement(imageId, canvas, from, to){
     const canvasImages = canvas.getObjects();
@@ -29,7 +29,7 @@ export function MoveCanvasElementTimed(imageId, canvas, from, to, duration){
             duration: duration * 1000,
             onChange: canvas.renderAll.bind(canvas),
             easing: fabric.util.ease["easeInOutQuad"],
-            onComplete: onActionEnded
+            onComplete: onActionEnded,
         });
     }
 }
@@ -47,6 +47,14 @@ export function FlipCanvasElement(imageId, direction, canvas){
 
         canvas.renderAll();
     }
+
+    onActionEnded();
+}
+
+export function ThrowDialogue(){
+    console.log("ThrowDialogue");
+
+    onActionEnded();
 }
 
 
@@ -56,8 +64,9 @@ function getImageObject(canvas, imageID){
     return canvasImages.find(imageObject => imageObject.id === imageID);
 }
 
-function onActionEnded(){
-    console.log("dispatching event onCanvasActionEnded");
-    document.dispatchEvent(onCanvasActionEndedEvent);
+function onActionEnded(step){
+    // console.log("dispatching event onCanvasActionEnded");
+    document.dispatchEvent(new Event("onCanvasActionEnded"));
+    // debugger;
 }
 //#endregion
