@@ -20,6 +20,22 @@ export class Step {
         return newStep;
     }
 
+    static listFromConfig(list) {
+        console.log(list.map((stepConfig) => Step.fromConfig(stepConfig)));
+        return list.map((stepConfig) => Step.fromConfig(stepConfig));
+    }
+
+    static fromConfig(stepConfig) {
+        const step = new Step();
+        step.step = stepConfig.step;
+        step.delay = stepConfig.delay || 0;
+        step.character = stepConfig.character;
+        step.action = stepConfig.action;
+        step.params = stepConfig.params || {};
+
+        return step;
+    }
+
     setAction(action) {
         this.action = action;
         this.params = setupParams(this.action);

@@ -21,6 +21,27 @@ export default class Actor {
         this.image = '';
     }
 
+    static fromConfig(actorConfig) {
+        const actor  = new Actor();
+        actor.id     = actorConfig.id;
+        actor.scale  = actorConfig.scale;
+        actor.offset = actorConfig.offset;
+
+        if (typeof actorConfig.name !== "undefined") {
+            actor.name = actorConfig.name;
+            actor.type = Actor.TYPE_MONSTER;
+        }
+        if (typeof actorConfig.monster !== "undefined") actor.monster = actorConfig.monster;
+        if (typeof actorConfig.evolution !== "undefined") actor.evolution = actorConfig.evolution;
+        if (typeof actorConfig.flipped !== "undefined") actor.flipped = actorConfig.flipped === 1;
+        if (typeof actorConfig.image !== "undefined") {
+            actor.image = actorConfig.image;
+            actor.type = Actor.TYPE_IMAGE;
+        }
+
+        return actor;
+    }
+
     isBackground() {
         return Actor.TYPE_IMAGE === this.type;
     }

@@ -1,3 +1,5 @@
+import Actor from "./Actor";
+
 export default class Scene {
     constructor() {
         this.id           = '';
@@ -16,6 +18,17 @@ export default class Scene {
         newScene.skip         = scene.skip ;
         newScene.repeat       = scene.repeat ;
         newScene.actors       = [...scene.actors];
+
+        return newScene;
+    }
+
+    static fromConfig(sceneConfig) {
+        const newScene = new Scene();
+        newScene.id            = sceneConfig.id;
+        newScene.internalName  = sceneConfig.internal_name;
+        newScene.skip          = sceneConfig.skip ;
+        newScene.repeat        = sceneConfig.repeat ;
+        newScene.actors        = sceneConfig.characters.map((actor) => Actor.fromConfig(actor));
 
         return newScene;
     }
