@@ -75,10 +75,9 @@ function setupParams(action) {
 
         case Action.MOVE:
             return {
-                "from": Action_Movement.OFFSCREEN_LEFT,
-                "to": Action_Movement.CENTER_2,
-                "duration": 1,
-            };
+                "to": Action_Movement.OFFSCREEN_LEFT,
+                "duration": 0,
+            }
 
         case Action.DIALOG:
             return {
@@ -97,8 +96,8 @@ function setupParams(action) {
         */
         case Action.WALK:
             return {
-                "to": Action_Movement.OFFSCREEN_LEFT,
-                "duration": 0,
+                "to": Action_Movement.RIGHT_1,
+                "duration": 1,
             }
         /*
         case Action.CHANGE_BACKGROUND:
