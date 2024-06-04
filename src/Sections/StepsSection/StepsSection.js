@@ -74,13 +74,7 @@ export default function StepsSection({
             return;
         }
 
-        const actionInfo = {
-            action: steps[playingStep].action,
-            id: steps[playingStep].character,
-            params: steps[playingStep].params,
-        };
-
-        playCanvasAction(actionInfo);
+        playStep(steps[playingStep]);
     }
 
     async function fabricImageFromURL(image_url) {
@@ -136,17 +130,22 @@ export default function StepsSection({
         playingStep = 0;
         continuousPlay = true;
 
-        const groupedSteps = groupSteps();
+        playStep(steps[playingStep]);
+    }
 
+    /**
+     * @param {Step} step
+     */
+    function playStep(step) {
         const actionInfo = {
             action: steps[playingStep].action,
             id: steps[playingStep].character,
             params: steps[playingStep].params,
         };
 
-        playCanvasAction(actionInfo);
-
-        console.log(groupedSteps);
+        setTimeout(() => {
+            playCanvasAction(actionInfo);
+        }, step.delay * 1000);
     }
 
     function groupSteps(){
