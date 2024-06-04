@@ -1,5 +1,5 @@
 import {useRef, useState, useEffect} from "react";
-import { fabric } from 'fabric';
+import {fabric} from 'fabric';
 
 import "./styles/StepsSection.css"
 import StepComponent from "./components/StepComponent";
@@ -8,7 +8,7 @@ import {CANVAS_WIDTH, CANVAS_HEIGHT} from "../../data/canvasDimensions";
 import {CENTER_2, MOVEMENT_TO_POSITION} from "../../data/positions";
 
 import {Action} from "../../Entities/Action";
-import {MoveCanvasElementTimed, FlipCanvasElement, EVENT_ON_CANVAS_ACTION_ENDED} from "./canvas_actions/CanvasActions";
+import * as CanvasActions from "./canvas_actions/CanvasActions";
 
 let playingStep = 0;
 let continuousPlay = false;
@@ -55,10 +55,10 @@ export default function StepsSection({
     }, [scene]);
 
     useEffect(() => {
-        document.addEventListener(EVENT_ON_CANVAS_ACTION_ENDED, onCanvasActionEnded);
+        document.addEventListener(CanvasActions.EVENT_ON_CANVAS_ACTION_ENDED, onCanvasActionEnded);
 
         return () => {
-            document.removeEventListener(EVENT_ON_CANVAS_ACTION_ENDED, onCanvasActionEnded);
+            document.removeEventListener(CanvasActions.EVENT_ON_CANVAS_ACTION_ENDED, onCanvasActionEnded);
         }
     }, [steps])
 
@@ -117,11 +117,15 @@ export default function StepsSection({
     function playCanvasAction(actionInfo){
         switch (actionInfo.action){
             case Action.MOVE:
-                MoveCanvasElementTimed(actionInfo.id, canvas, MOVEMENT_TO_POSITION[actionInfo.params.from], MOVEMENT_TO_POSITION[actionInfo.params.to], actionInfo.params.duration);
+                CanvasActions.moveCanvasElementTimed(actionInfo.id, canvas, MOVEMENT_TO_POSITION[actionInfo.params.from], MOVEMENT_TO_POSITION[actionInfo.params.to], actionInfo.params.duration);
+                break;
+
+            case Action.WALK:
+                CanvasActions.moveCanvasElementTimedFromCurrPosition(actionInfo.id, canvas, MOVEMENT_TO_POSITION[actionInfo.params.to], actionInfo.params.duration);
                 break;
 
             case Action.LOOK:
-                FlipCanvasElement(actionInfo.id, actionInfo.params.direction, canvas);
+                CanvasActions.flipCanvasElement(actionInfo.id, actionInfo.params.direction, canvas);
                 break;
 
             default:
@@ -151,7 +155,7 @@ export default function StepsSection({
         }, step.delay * 1000);
     }
 
-    function groupSteps(){
+    /*function groupSteps(){
         let groupedSteps = [];
 
         for(let i = 0; i < steps.length; i++){
@@ -164,7 +168,7 @@ export default function StepsSection({
         }
 
         return groupedSteps;
-    }
+    }*/
     //#endregion
 
     //#region RETURN
@@ -190,15 +194,15 @@ export default function StepsSection({
                     </div>
                     <div className="stepsSection--steps">
                     {steps.map((step, idx) =>
-                            <StepComponent
-                                key={idx}
-                                step={step}
-                                actors={scene.actors}
-                                onModifyStep={(prop, value) => onModifyStep(idx, prop, value)}
-                                onModifyStepParam={(param, value) => onModifyStepParam(idx, param, value)}
-                                playAction={playCanvasAction}
-                            />
-                        )}
+                        <StepComponent
+                            key={idx}
+                            step={step}
+                            actors={scene.actors}
+                            onModifyStep={(prop, value) => onModifyStep(idx, prop, value)}
+                            onModifyStepParam={(param, value) => onModifyStepParam(idx, param, value)}
+                            playAction={playCanvasAction}
+                        />
+                    )}
                     </div>
                 </div>
             </div>

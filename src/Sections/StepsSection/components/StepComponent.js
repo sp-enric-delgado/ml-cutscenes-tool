@@ -35,7 +35,7 @@ export default function StepComponent({step, actors, onModifyStep, onModifyStepP
                 {Object.keys(step.params).map((param, index) => (
                     <li key={index}>
                         <label htmlFor={param}>&emsp;{param}: </label>
-                        {(Action.MOVE === step.action && ["from", "to"].includes(param)) ? (
+                        {([Action.MOVE, Action.WALK].includes(step.action) && ["from", "to"].includes(param)) ? (
                             <select id={param} value={step.params[param]} onChange={(e) => onModifyStepParam(param, e.target.value)}>
                                 <option></option>
                                 {Action_Movement.ALL.map((movement, idx) => <option key={idx}>{movement}</option>)}

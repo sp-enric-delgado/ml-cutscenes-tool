@@ -5,7 +5,7 @@ export class Action {
     static MOVE = "move";
     static DIALOG = "dialog";
     // static SKILL_EFFECT = "skill_effect";
-    // static WALK = "walk";
+    static WALK = "walk";
     // static CHANGE_BACKGROUND = "change_background";
     // static ANIMATION = "animation";
 
@@ -16,7 +16,7 @@ export class Action {
         this.MOVE,
         this.DIALOG,
         // this.SKILL_EFFECT,
-        // this.WALK,
+        this.WALK,
         // this.CHANGE_BACKGROUND,
         // this.ANIMATION,
     ];

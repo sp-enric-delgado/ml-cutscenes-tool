@@ -1,5 +1,4 @@
 import {Action, Action_Movement} from "./Action";
-import {Animation} from "./Animation";
 import {LookDirection} from "./LookDirection";
 
 export class Step {
@@ -79,13 +78,13 @@ function setupParams(action) {
                 "loop": 0,
                 "wait": 1,
             }
-
+        */
         case Action.WALK:
             return {
                 "to": Action_Movement.OFFSCREEN_LEFT,
                 "duration": 0,
             }
-
+        /*
         case Action.CHANGE_BACKGROUND:
             return {
                 "image": "",

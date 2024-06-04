@@ -3,7 +3,7 @@ import {Action_Movement} from "../../../Entities/Action";
 
 export const EVENT_ON_CANVAS_ACTION_ENDED = "onCanvasActionEnded";
 
-export function MoveCanvasElement(imageId, canvas, from, to){
+function _moveCanvasElement(imageId, canvas, from, to){
     const canvasImages = canvas.getObjects();
 
     const currentImage = canvasImages.find(imageObject => imageObject.id === imageId);
@@ -19,10 +19,10 @@ export function MoveCanvasElement(imageId, canvas, from, to){
     canvas.renderAll();
 }
 
-export function MoveCanvasElementTimed(imageId, canvas, from, to, duration){
+export function moveCanvasElementTimed(imageId, canvas, from, to, duration){
     const imageObject = getImageObject(canvas, imageId);
 
-    MoveCanvasElement(imageId, canvas, Action_Movement.OFFSCREEN_LEFT, from, 0);
+    _moveCanvasElement(imageId, canvas, Action_Movement.OFFSCREEN_LEFT, from, 0);
 
     if (imageObject) {
         imageObject.animate('left', (to.x - (imageObject.width / 2)), {
@@ -34,7 +34,13 @@ export function MoveCanvasElementTimed(imageId, canvas, from, to, duration){
     }
 }
 
-export function FlipCanvasElement(imageId, direction, canvas){
+export function moveCanvasElementTimedFromCurrPosition(imageId, canvas, to, duration){
+    const from = getImagePosition(canvas, imageId);
+
+    moveCanvasElementTimed(imageId, canvas, from, to, duration);
+}
+
+export function flipCanvasElement(imageId, direction, canvas){
     const imageObject = getImageObject(canvas, imageId);
 
     console.log(JSON.stringify(direction, null, 2));
@@ -67,4 +73,19 @@ function getImageObject(canvas, imageID){
 function onActionEnded(){
     document.dispatchEvent(new Event(EVENT_ON_CANVAS_ACTION_ENDED));
 }
+
+function getImagePosition(canvas, imageId){
+    if (canvas === null) {
+        return;
+    }
+
+    const imageObject = getImageObject(canvas, imageId);
+
+    if (!imageObject) {
+        throw new Error(`Can't find image with id ${imageId}`);
+    }
+
+    return  imageObject.getPointByOrigin('center', 'center');
+}
+
 //#endregion
