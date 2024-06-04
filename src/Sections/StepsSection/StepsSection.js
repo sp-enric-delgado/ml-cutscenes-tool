@@ -69,7 +69,7 @@ export default function StepsSection({
 
         playingStep++;
 
-        if (playingStep > steps.length) {
+        if (playingStep > steps.length - 1) {
             continuousPlay = false;
             return;
         }
