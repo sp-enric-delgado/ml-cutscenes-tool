@@ -5,7 +5,7 @@ import "./styles/StepsSection.css"
 import StepComponent from "./components/StepComponent";
 
 import {CANVAS_WIDTH, CANVAS_HEIGHT} from "../../data/canvasDimensions";
-import {CENTER_2, LEFT_2, positions, RIGHT_2} from "../../data/positions";
+import {CENTER_2, MOVEMENT_TO_POSITION} from "../../data/positions";
 
 import {Action} from "../../Entities/Action";
 import {MoveCanvasElementTimed, FlipCanvasElement, EVENT_ON_CANVAS_ACTION_ENDED} from "./canvas_actions/CanvasActions";
@@ -111,10 +111,13 @@ export default function StepsSection({
         } catch (error) { console.log("[CANVAS COMPONENT] COULDN'T ADD IMAGE TO CANVAS: " + error); }
     }
 
+    /**
+     * @param {{id: string, action: string, params: Object}} actionInfo
+     */
     function playCanvasAction(actionInfo){
         switch (actionInfo.action){
             case Action.MOVE:
-                MoveCanvasElementTimed(actionInfo.id, canvas, positions[actionInfo.params.from], positions[actionInfo.params.to], actionInfo.params.duration);
+                MoveCanvasElementTimed(actionInfo.id, canvas, MOVEMENT_TO_POSITION[actionInfo.params.from], MOVEMENT_TO_POSITION[actionInfo.params.to], actionInfo.params.duration);
                 break;
 
             case Action.LOOK:

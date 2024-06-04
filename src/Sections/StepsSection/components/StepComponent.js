@@ -1,16 +1,9 @@
 import {Action, Action_Movement} from "../../../Entities/Action";
-import {useEffect, useState} from "react";
 import {LookDirection} from "../../../Entities/LookDirection";
 
 export default function StepComponent({step, actors, onModifyStep, onModifyStepParam, playAction}) {
-    const [actionInfo, setActionInfo] = useState({"action": "", "id": "", "params": {}});
-
-    useEffect(() => {
-        setActionInfo({action: step.action, id: step.character, params: step.params});
-    }, [step]);
-
     function sendInfo() {
-        playAction(actionInfo);
+        playAction({action: step.action, id: step.character, params: step.params});
     }
 
     return(

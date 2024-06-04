@@ -16,7 +16,7 @@ export const CENTER_2 = {
 };
 // export const CENTER_3": {};
 
-export const positions = {
+export const MOVEMENT_TO_POSITION = {
     [Action_Movement.OFFSCREEN_LEFT]: OFFSCREEN_LEFT,
     [Action_Movement.OFFSCREEN_RIGHT]: OFFSCREEN_RIGHT,
     [Action_Movement.LEFT_1]: LEFT_1,
