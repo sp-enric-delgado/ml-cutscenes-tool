@@ -8,7 +8,7 @@ import {CANVAS_WIDTH, CANVAS_HEIGHT} from "../../data/canvasDimensions";
 import {CENTER_2, LEFT_2, positions, RIGHT_2} from "../../data/positions";
 
 import {Action} from "../../Entities/Action";
-import { onCanvasActionEndedEvent, MoveCanvasElementTimed, FlipCanvasElement} from "./canvas_actions/CanvasActions";
+import {MoveCanvasElementTimed, FlipCanvasElement, EVENT_ON_CANVAS_ACTION_ENDED} from "./canvas_actions/CanvasActions";
 
 let playingStep = 0;
 let continuousPlay = false;
@@ -55,13 +55,14 @@ export default function StepsSection({
     }, [scene]);
 
     useEffect(() => {
-        console.log(steps);
-        document.removeEventListener("onCanvasActionEnded", onCanvasActionEnded);
-        document.addEventListener("onCanvasActionEnded", onCanvasActionEnded);
+        document.addEventListener(EVENT_ON_CANVAS_ACTION_ENDED, onCanvasActionEnded);
+
+        return () => {
+            document.removeEventListener(EVENT_ON_CANVAS_ACTION_ENDED, onCanvasActionEnded);
+        }
     }, [steps])
 
     function onCanvasActionEnded() {
-        // debugger;
         if (!continuousPlay) {
             return;
         }

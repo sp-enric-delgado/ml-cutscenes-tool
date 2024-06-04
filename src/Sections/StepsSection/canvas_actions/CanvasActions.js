@@ -1,7 +1,7 @@
 import {fabric} from "fabric";
 import {Action_Movement} from "../../../Entities/Action";
 
-// export const onCanvasActionEndedEvent = new Event("onCanvasActionEnded");
+export const EVENT_ON_CANVAS_ACTION_ENDED = "onCanvasActionEnded";
 
 export function MoveCanvasElement(imageId, canvas, from, to){
     const canvasImages = canvas.getObjects();
@@ -64,9 +64,7 @@ function getImageObject(canvas, imageID){
     return canvasImages.find(imageObject => imageObject.id === imageID);
 }
 
-function onActionEnded(step){
-    // console.log("dispatching event onCanvasActionEnded");
-    document.dispatchEvent(new Event("onCanvasActionEnded"));
-    // debugger;
+function onActionEnded(){
+    document.dispatchEvent(new Event(EVENT_ON_CANVAS_ACTION_ENDED));
 }
 //#endregion
