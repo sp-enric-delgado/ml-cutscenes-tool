@@ -39,12 +39,13 @@ export class Action_Movement {
         this.OFFSCREEN_LEFT,
         this.LEFT_1,
         this.LEFT_2,
-        this.LEFT_3,
-        this.RIGHT_1,
-        this.RIGHT_2,
-        this.RIGHT_3,
         // this.CENTER_1,
+        this.LEFT_3,
         this.CENTER_2,
+        this.RIGHT_3,
         // this.CENTER_3,
+        this.RIGHT_2,
+        this.RIGHT_1,
+        this.OFFSCREEN_RIGHT,
     ];
 }

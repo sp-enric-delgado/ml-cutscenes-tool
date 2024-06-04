@@ -1,8 +1,8 @@
 import {CANVAS_HEIGHT, CANVAS_WIDTH} from "./canvasDimensions";
 import {Action_Movement} from "../Entities/Action";
 
-export const OFFSCREEN_LEFT = {x: -100, y: CANVAS_HEIGHT / 2};
-export const OFFSCREEN_RIGHT = {x: CANVAS_WIDTH + 100, y: CANVAS_HEIGHT / 2};
+export const OFFSCREEN_LEFT = {x: -200, y: CANVAS_HEIGHT / 2};
+export const OFFSCREEN_RIGHT = {x: CANVAS_WIDTH + 200, y: CANVAS_HEIGHT / 2};
 export const LEFT_1 = {x: 0.25 * (CANVAS_WIDTH / 2), y: CANVAS_HEIGHT / 2};
 export const LEFT_2 = {x: 0.5 * (CANVAS_WIDTH / 2), y: CANVAS_HEIGHT / 2};
 export const LEFT_3 = {x: 0.75*(CANVAS_WIDTH/2), y: CANVAS_HEIGHT / 2};
