@@ -87,3 +87,8 @@ label {
 .step-selected {
     background-color: beige;
 }
+
+.stepsSection--steps {
+    height: 100vh;
+    overflow-y: scroll;
+}
