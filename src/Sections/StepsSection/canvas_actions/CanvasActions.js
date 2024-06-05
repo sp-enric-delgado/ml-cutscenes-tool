@@ -20,10 +20,10 @@ function _moveCanvasElement(imageId, canvas, from, to){
     canvas.renderAll();
 }
 
-export function moveCanvasElementTimed(imageId, canvas, from, to, duration){
+export function moveCanvasElementTimed(imageId, canvas/*, from*/, to, duration){
     const imageObject = getImageObject(canvas, imageId);
 
-    _moveCanvasElement(imageId, canvas, Action_Movement.OFFSCREEN_LEFT, from, 0);
+    //_moveCanvasElement(imageId, canvas, Action_Movement.OFFSCREEN_LEFT, from, 0);
 
     if (imageObject) {
         imageObject.animate('left', (to.x - (imageObject.width / 2)), {
