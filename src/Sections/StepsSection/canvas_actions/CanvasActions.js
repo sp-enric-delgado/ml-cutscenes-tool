@@ -26,7 +26,7 @@ export function moveCanvasElementTimed(imageId, canvas, from, to, duration){
 
     if (imageObject) {
         imageObject.animate('left', (to.x - (imageObject.width / 2)), {
-            duration: duration * 1000,
+            duration: !duration ? -1 : duration * 1000,
             onChange: canvas.renderAll.bind(canvas),
             easing: fabric.util.ease["easeInOutQuad"],
             onComplete: onActionEnded,
