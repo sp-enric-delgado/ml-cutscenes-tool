@@ -83,3 +83,7 @@ label {
 .asset-preview {
     max-width: 200px;
 }
+
+.step-selected {
+    background-color: beige;
+}

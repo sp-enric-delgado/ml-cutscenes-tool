@@ -30,6 +30,7 @@ export default function StepsSection({
     //#region CANVAS
     const [canvas, setCanvas] = useState(null);
     const canvasRef = useRef();
+    const [uiPlayingStep, setUiPlayingStep] = useState(0);
     //#endregion
 
     //#region FUNCTIONS
@@ -60,12 +61,14 @@ export default function StepsSection({
         return () => {
             document.removeEventListener(CanvasActions.EVENT_ON_CANVAS_ACTION_ENDED, onCanvasActionEnded);
         }
-    }, [canvas, steps])
+    }, [canvas, steps, uiPlayingStep])
 
     function onCanvasActionEnded() {
         if (!continuousPlay) {
             return;
         }
+
+        setUiPlayingStep(playingStep + 1);
 
         playingStep++;
 
@@ -196,16 +199,17 @@ export default function StepsSection({
                         <button onClick={playAllSteps}>Play All</button>
                     </div>
                     <div className="stepsSection--steps">
-                    {steps.map((step, idx) =>
-                        <StepComponent
-                            key={idx}
-                            step={step}
-                            actors={scene.actors}
-                            onModifyStep={(prop, value) => onModifyStep(idx, prop, value)}
-                            onModifyStepParam={(param, value) => onModifyStepParam(idx, param, value)}
-                            playAction={playCanvasAction}
-                        />
-                    )}
+                        {steps.map((step, idx) =>
+                            <StepComponent
+                                key={idx}
+                                step={step}
+                                actors={scene.actors}
+                                onModifyStep={(prop, value) => onModifyStep(idx, prop, value)}
+                                onModifyStepParam={(param, value) => onModifyStepParam(idx, param, value)}
+                                playAction={playCanvasAction}
+                                isPlaying={idx === playingStep}
+                            />
+                        )}
                     </div>
                 </div>
             </div>
