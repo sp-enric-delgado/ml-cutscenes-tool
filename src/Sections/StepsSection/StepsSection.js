@@ -34,7 +34,7 @@ export default function StepsSection({
 
     //#region FUNCTIONS
     useEffect(() => {
-        var cnv = new fabric.Canvas(canvasRef.current);
+        const cnv = new fabric.Canvas(canvasRef.current);
         cnv.setDimensions({width: CANVAS_WIDTH, height: CANVAS_HEIGHT});
 
         setCanvas(cnv);
@@ -52,7 +52,7 @@ export default function StepsSection({
                 isBackground: actor.isBackground(),
             });
         });
-    }, [scene]);
+    }, [canvas, scene]);
 
     useEffect(() => {
         document.addEventListener(CanvasActions.EVENT_ON_CANVAS_ACTION_ENDED, onCanvasActionEnded);
@@ -60,7 +60,7 @@ export default function StepsSection({
         return () => {
             document.removeEventListener(CanvasActions.EVENT_ON_CANVAS_ACTION_ENDED, onCanvasActionEnded);
         }
-    }, [steps])
+    }, [canvas, steps])
 
     function onCanvasActionEnded() {
         if (!continuousPlay) {
