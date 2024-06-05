@@ -1,5 +1,6 @@
 import {Action, Action_Movement} from "../../../Entities/Action";
 import {LookDirection} from "../../../Entities/LookDirection";
+import './StepComponent.css'
 
 export default function StepComponent({step, actors, onModifyStep, onModifyStepParam, playAction, isPlaying}) {
     function sendInfo() {
@@ -7,7 +8,7 @@ export default function StepComponent({step, actors, onModifyStep, onModifyStepP
     }
 
     return(
-        <div className={isPlaying ? 'step-selected' : ''}>
+        <div className={isPlaying ? 'step-selected' : 'step'}>
             <ul>
                 <li>
                     <label htmlFor="stepInput">Step: </label>

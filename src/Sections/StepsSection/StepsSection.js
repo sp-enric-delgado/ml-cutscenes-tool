@@ -186,7 +186,6 @@ export default function StepsSection({
 
             <div className="body">
                 <div className="canvasSection">
-                    <h1 className="title">Canvas</h1>
                     <div className="canvasDiv">
                         <canvas ref={canvasRef} className="canvas"/>
                     </div>

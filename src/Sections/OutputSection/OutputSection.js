@@ -1,6 +1,8 @@
+import './OutputSection.css'
+
 export default function OutputSection({scene, steps}) {
     return (
-        <div>
+        <div className="output-section">
             <hr />
             <h2>Output</h2>
             <h3>Scene</h3>

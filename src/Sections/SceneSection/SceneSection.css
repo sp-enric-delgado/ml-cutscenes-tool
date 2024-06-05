@@ -1,0 +1,95 @@
+.scenesection{
+    display: flex;
+    flex-direction: column;
+
+
+    gap: 2rem;
+}
+
+.scenesection--header{
+   text-align: center;
+}
+
+.scenesection--body{
+    display: grid;
+    gap: 1rem;
+}
+
+/*#region SETUP SECTION*/
+.section--setup{
+    display: flex;
+    flex-direction: column;
+
+    padding: 2rem;
+
+    background: rgba(255, 255, 255, 0.13);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.4px);
+    -webkit-backdrop-filter: blur(10.4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.section--setup-title{
+
+}
+
+.section--setup-content{
+    display: flex;
+    flex-direction: row;
+
+    gap: 3rem;
+}
+/*#endregion*/
+
+/*#region ACTORS SECTION*/
+.section--actors{
+    display: flex;
+    flex-direction: column;
+}
+
+.section--actors-header{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: start;
+    align-items: center;
+
+    padding: 1.5rem;
+    gap: 1rem;
+}
+
+.section--actors-body{
+    display: flex;
+    flex-direction: row;
+
+    gap: 1rem;
+
+    justify-content: left;
+    align-items: start;
+
+    padding: 1.5rem;
+}
+
+.section--actors-body::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+.actor {
+    display: flex;
+    flex-direction: column;
+
+    padding: 1rem;
+
+    color: #000000;
+    border-radius: 12px;
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.5), -4px -4px 16px rgba(255, 255, 255, 0.05);
+
+    float: left;
+}
+/*#endregion*/
+
+

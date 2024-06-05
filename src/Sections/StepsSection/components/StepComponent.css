@@ -1,0 +1,17 @@
+
+.step,
+.step-selected{
+    padding: .5rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+
+    color: #000000;
+    border-radius: 12px;
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.5), -4px -4px 16px rgba(255, 255, 255, 0.05);
+}
+
+.step-selected {
+    background-color: beige;
+}

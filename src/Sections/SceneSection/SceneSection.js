@@ -1,4 +1,5 @@
 import ActorComponent from "./components/ActorComponent";
+import "./SceneSection.css"
 
 export default function SceneSection({
                                          scene,
@@ -9,42 +10,69 @@ export default function SceneSection({
                                          onNextClicked
 }) {
     return (
-        <div>
-            <h1>Scene</h1>
-            <div>
-                <label>Id</label>
-                <input type="number" value={scene.id}  onChange={(e) => onModifyScene('id', e.target.value)}/>
+        <div className="scenesection">
+            <div className="scenesection--header">
+                <h1>Monster Legends Cutscene Tool</h1>
             </div>
-            <div>
-                <label>Internal name</label>
-                <input type="text" value={scene.internalName} onChange={(e) => onModifyScene('internalName', e.target.value)}/>
-            </div>
-            <div>
-                <label>Skip</label>
-                <input type="checkbox" checked={scene.skip} onChange={(e) => onModifyScene('skip', e.target.checked)}/>
-            </div>
-            <div>
-                <label>Repeat</label>
-                <input type="checkbox" checked={scene.repeat} onChange={(e) => onModifyScene('repeat', e.target.checked)}/>
-            </div>
-            <div>
-                <h2>Actors / Characters</h2>
-                <button onClick={onAddActor}>Add Actor</button>
-                <div className="clearfix">
-                    {scene.actors.map((actor, idx) =>
-                        <div key={idx} className="float box">
-                            <h2>Actor {idx + 1}</h2>
-                            <ActorComponent
-                                actor={actor}
-                                onActorChanged={(prop, value) => onModifyActor(idx, prop, value)}
-                            />
-                            <button onClick={() => onRemoveActor(idx)}>Remove</button>
+
+            <div className="scenesection--body">
+                <div className="section--setup">
+                    <div className="section--setup-title">
+                        <h2>Scene Setup</h2>
+                    </div>
+                    <div className="section--setup-content">
+                        <div>
+                            <label>Id</label>
+                            <input type="number" value={scene.id}
+                                   onChange={(e) => onModifyScene('id', e.target.value)}/>
                         </div>
-                    )}
+                        <div>
+                            <label>Internal name</label>
+                            <input type="text" value={scene.internalName}
+                                   onChange={(e) => onModifyScene('internalName', e.target.value)}/>
+                        </div>
+                        <div>
+                            <label>Skip</label>
+                            <input type="checkbox" checked={scene.skip}
+                                   onChange={(e) => onModifyScene('skip', e.target.checked)}/>
+                        </div>
+                        <div>
+                            <label>Repeat</label>
+                            <input type="checkbox" checked={scene.repeat}
+                                   onChange={(e) => onModifyScene('repeat', e.target.checked)}/>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="section--actors">
+                    <div className="section--actors-header">
+                        <h2>Actors / Characters</h2>
+                        <button onClick={onAddActor}>Add Actor</button>
+                    </div>
+
+                    <div className="section--actors-body">
+                        {scene.actors.map((actor, idx) =>
+                            <div key={idx} className="actor">
+                                <div className="actor--name">
+                                    <h2>Actor {idx + 1}</h2>
+                                </div>
+
+                                <ActorComponent
+                                    actor={actor}
+                                    onActorChanged={(prop, value) => onModifyActor(idx, prop, value)}
+                                />
+                                <div className="actor--button">
+                                    <button onClick={() => onRemoveActor(idx)}>Remove</button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
 
-            <button onClick={onNextClicked}>Next</button>
+            <div className="scenesection--footer">
+                <button onClick={onNextClicked}>Next</button>
+            </div>
         </div>
     );
 }
