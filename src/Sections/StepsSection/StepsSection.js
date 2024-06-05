@@ -126,6 +126,7 @@ export default function StepsSection({
                 break;
 
             default:
+                onCanvasActionEnded();
                 break;
         }
     }
