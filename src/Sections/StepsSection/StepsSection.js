@@ -125,6 +125,11 @@ export default function StepsSection({
                 CanvasActions.flipCanvasElement(actionInfo.id, actionInfo.params.direction, canvas);
                 break;
 
+            case Action.DIALOG:
+                alert("Dialog");
+                onCanvasActionEnded();
+                break;
+
             default:
                 onCanvasActionEnded();
                 break;
