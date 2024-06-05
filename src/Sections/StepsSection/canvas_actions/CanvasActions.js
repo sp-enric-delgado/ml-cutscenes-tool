@@ -43,13 +43,20 @@ export function moveCanvasElementTimedFromCurrPosition(imageId, canvas, to, dura
 export function flipCanvasElement(imageId, direction, canvas){
     const imageObject = getImageObject(canvas, imageId);
 
-    console.log(JSON.stringify(direction, null, 2));
+    // console.log(JSON.stringify(direction, null, 2));
 
-    if (imageObject && imageObject.flipDir !== direction) {
-        imageObject.set({
-            flipDir: direction,
-            flipX: !imageObject.flipX
-        })
+
+    if (imageObject /*&& imageObject.flipDir !== direction*/) {
+        const newDirection = direction === 'inverse' ?
+            (imageObject.flipDir === 'right' ? 'left' : 'right') :
+            direction;
+
+        if (newDirection !== imageObject.flipDir) {
+            imageObject.set({
+                flipDir: newDirection,
+                flipX: !imageObject.flipX
+            });
+        }
 
         canvas.renderAll();
     }
