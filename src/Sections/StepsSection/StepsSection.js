@@ -129,8 +129,8 @@ export default function StepsSection({
                 break;
 
             case Action.DIALOG:
-                alert("Dialog");
-                onCanvasActionEnded();
+                // alert("Dialog");
+                setTimeout(onCanvasActionEnded, 1000);
                 break;
 
             default:
