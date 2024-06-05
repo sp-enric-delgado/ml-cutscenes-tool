@@ -129,8 +129,7 @@ export default function StepsSection({
                 break;
 
             case Action.DIALOG:
-                // alert("Dialog");
-                setTimeout(onCanvasActionEnded, 1000);
+                CanvasActions.ThrowDialogue(actionInfo.id, canvas);
                 break;
 
             default:

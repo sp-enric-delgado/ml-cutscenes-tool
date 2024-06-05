@@ -1,5 +1,6 @@
 import {fabric} from "fabric";
 import {Action_Movement} from "../../../Entities/Action";
+import {CANVAS_HEIGHT, CANVAS_WIDTH} from "../../../data/canvasDimensions";
 
 export const EVENT_ON_CANVAS_ACTION_ENDED = "onCanvasActionEnded";
 
@@ -64,10 +65,31 @@ export function flipCanvasElement(imageId, direction, canvas){
     onActionEnded();
 }
 
-export function ThrowDialogue(){
-    console.log("ThrowDialogue");
+export function ThrowDialogue(imageId, canvas){
+    const dialogue = imageId + ": PLACEHOLDER TEXT";
+     const textbox = new fabric.Textbox(dialogue, {
+            left: CANVAS_WIDTH/2 - (CANVAS_WIDTH*0.75)/2,
+            top: CANVAS_HEIGHT - CANVAS_WIDTH/7,
+            fontSize: 22,
+            fontFamily: "Helvetica",
+            fill: "#000000",
+            fontStyle: "italic",
+            width: CANVAS_WIDTH*0.75,
+            height: CANVAS_HEIGHT/2,
+            opacity: 255,
+            textAlign: "left",
+            backgroundColor: "white",
+        }
+    );
 
-    onActionEnded();
+    canvas.add(textbox);
+    canvas.renderAll();
+
+    setTimeout(() => {
+        canvas.remove(textbox);
+        canvas.renderAll();
+        onActionEnded();
+    }, 1000);
 }
 
 
