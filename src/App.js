@@ -581,7 +581,7 @@ export default function App() {
     }
 
     function addStep(){
-        setSteps([...steps, new Step()]);
+        setSteps([...steps, new Step()].sort((a, b) => a.step - b.step));
     }
 
     function modifyStep(idx, prop, value) {
@@ -596,7 +596,7 @@ export default function App() {
 
         newSteps[idx] = newStep;
 
-        setSteps(newSteps);
+        setSteps(newSteps.sort((a, b) => a.step - b.step));
     }
 
     function modifyStepParam(idx, param, value) {

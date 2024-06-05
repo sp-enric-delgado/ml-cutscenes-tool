@@ -21,8 +21,7 @@ export class Step {
     }
 
     static listFromConfig(list) {
-        console.log(list.map((stepConfig) => Step.fromConfig(stepConfig)));
-        return list.map((stepConfig) => Step.fromConfig(stepConfig));
+        return list.map((stepConfig) => Step.fromConfig(stepConfig)).sort((a, b) => a.step - b.step);
     }
 
     static fromConfig(stepConfig) {
