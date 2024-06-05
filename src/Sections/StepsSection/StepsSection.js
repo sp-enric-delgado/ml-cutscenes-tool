@@ -117,11 +117,8 @@ export default function StepsSection({
     function playCanvasAction(actionInfo){
         switch (actionInfo.action){
             case Action.MOVE:
-                CanvasActions.moveCanvasElementTimed(actionInfo.id, canvas, MOVEMENT_TO_POSITION[actionInfo.params.from], MOVEMENT_TO_POSITION[actionInfo.params.to], actionInfo.params.duration);
-                break;
-
             case Action.WALK:
-                CanvasActions.moveCanvasElementTimedFromCurrPosition(actionInfo.id, canvas, MOVEMENT_TO_POSITION[actionInfo.params.to], actionInfo.params.duration);
+                CanvasActions.moveCanvasElementTimed(actionInfo.id, canvas, MOVEMENT_TO_POSITION[actionInfo.params.to], actionInfo.params.duration);
                 break;
 
             case Action.LOOK:
