@@ -108,7 +108,8 @@ export default function StepsSection({
                 options.originY,
             );
 
-            canvas.insertAt(img, 0);
+            const imageIndex = options.isBackground ? 0 : 1;
+            canvas.insertAt(img, imageIndex);
             canvas.renderAll.bind(canvas);
 
         } catch (error) { console.log("[CANVAS COMPONENT] COULDN'T ADD IMAGE TO CANVAS: " + error); }
