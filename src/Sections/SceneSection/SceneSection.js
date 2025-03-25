@@ -12,7 +12,7 @@ export default function SceneSection({
     return (
         <div className="scenesection">
             <div className="scenesection--header">
-                <h1>Monster Legends Cutscene Tool</h1>
+                <h1>Monster Legends Cutscenes Tool</h1>
             </div>
 
             <div className="scenesection--body">
